@@ -1,0 +1,14 @@
+Package: bADRfcts
+Type: Package
+Title: Function Container For Bayesian ADR Project
+Version: 1.0.0
+Author: Julia Dyck 
+Maintainer: Julia Dyck <j.dyck@uni-bielefeld.de>
+Description: This package contains functions created for the bADR project. More detailed, they might be needed to 
+        construct the model, the estimation procedure and the test method. 
+        Furthermore, functions are provided to conduct a corresponding simulation study.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.0
+Imports: rstan

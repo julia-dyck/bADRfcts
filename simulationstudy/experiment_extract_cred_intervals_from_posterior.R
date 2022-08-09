@@ -9,7 +9,7 @@ stanfit.to.cred.ints = function(stanfit.object, cred.niveaus = seq(0.05, 0.95, b
   obj = stanfit.object
 
   # extraction of posterior samples
-  post.sample = rstan::extract(testout[[4]][[4]], pars = c("nu", "gamma"))
+  post.sample = rstan::extract(obj, pars = c("nu", "gamma"))
   nu.post = post.sample$nu
   gam.post = post.sample$gam
 

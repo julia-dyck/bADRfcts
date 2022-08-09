@@ -47,6 +47,7 @@ sim.fit.to.one.sample = function(survdat){
    for(i in 1:4){
      fits.fgg[[i]] = rstan::stan(
        file = "simulationstudy/fix.gam.gam.stan",  # Stan program
+       model_name = "fix.gam.gam.model", # model name
        data = datstan[[i]],    # named list of data
        chains = 4,             # number of Markov chains
        warmup = 1000,          # number of warmup iterations per chain
@@ -61,6 +62,7 @@ sim.fit.to.one.sample = function(survdat){
   for(i in 1:4){
     fits.ggg[[i]] = rstan::stan(
       file = "simulationstudy/gam.gam.gam.stan",  # Stan program
+      model_name = "gam.gam.gam.model", # model name
       data = datstan[[i]],    # named list of data
       chains = 4,             # number of Markov chains
       warmup = 1000,          # number of warmup iterations per chain
@@ -75,6 +77,7 @@ sim.fit.to.one.sample = function(survdat){
   for(i in 1:4){
     fits.fll[[i]] = rstan::stan(
       file = "simulationstudy/fix.gam.gam.stan",  # Stan program
+      model_name = "fix.log.log.model", # model name
       data = datstan[[i]],    # named list of data
       chains = 4,             # number of Markov chains
       warmup = 1000,          # number of warmup iterations per chain
@@ -89,6 +92,7 @@ sim.fit.to.one.sample = function(survdat){
   for(i in 1:4){
     fits.lll[[i]] = rstan::stan(
       file = "simulationstudy/log.log.log.stan",  # Stan program
+      model_name = "log.log.log.model", # model name
       data = datstan[[i]],    # named list of data
       chains = 4,             # number of Markov chains
       warmup = 1000,          # number of warmup iterations per chain

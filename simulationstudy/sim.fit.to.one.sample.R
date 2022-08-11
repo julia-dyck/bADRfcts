@@ -43,19 +43,20 @@ sim.fit.to.one.sample = function(survdat){
                                      shape.mean = 5, shape.sd = 10,
                                      powershape.mean = 15, powershape.sd = 10)
   ### fitting fix.gam.gam prior
-  fits.fgg = list()
-   for(i in 1:4){
-     fits.fgg[[i]] = rstan::stan(
-       file = "simulationstudy/fix.gam.gam.stan",  # Stan program
-       model_name = "fix.gam.gam.model", # model name
-       data = datstan[[i]],    # named list of data
-       chains = 4,             # number of Markov chains
-       warmup = 1000,          # number of warmup iterations per chain
-       iter = 15000,            # total number of iterations per chain
-       cores = getOption("mc.cores", 1L) - 1,     # number of cores (one per chain)
-       refresh = 1             # progress shown
-     )
-   }
+  # fits.fgg = list()
+  #  for(i in 1:4){
+  #    fits.fgg[[i]] = rstan::stan(
+  #      file = "simulationstudy/fix.gam.gam.stan",  # Stan program
+  #      model_name = "fix.gam.gam.model", # model name
+  #      data = datstan[[i]],    # named list of data
+  #      chains = 4,             # number of Markov chains
+  #      warmup = 1000,          # number of warmup iterations per chain
+  #      iter = 15000,            # total number of iterations per chain
+  #      cores = getOption("mc.cores", 1L) - 1,     # number of cores (one per chain)
+  #      refresh = 1             # progress shown
+  #    )
+  #  }
+  fits.fgg = lapply(datstan, fit.fgg)
 
   ### fitting gam.gam.gam prior
   fits.ggg = list()

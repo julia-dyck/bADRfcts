@@ -44,33 +44,46 @@ sim.fit.to.one.sample = function(survdat){
                                      powershape.mean = 15, powershape.sd = 10)
 
   ### fitting fix.gam.gam prior
-  fits.fgg = lapply(datstan, fit.fgg)
+  fgg = lapply(datstan, fit.fgg)
   for(prior.ind in 1:4){
-    fits.fgg[[prior.ind]]@model_name = "fix.gam.gam" # manually, because not working automatically
+    fgg[[prior.ind]]@model_name = "fix.gam.gam" # manually, because not working automatically
   }
-  # for each of the 16 stanfits
   # -> extract meta statistics and
+  meta.fgg = list(meta.fgg.pr1 = stanfit.to.metastats(fgg[[1]], datstan[[1]]),
+                  meta.fgg.pr2 = stanfit.to.metastats(fgg[[2]], datstan[[2]]),
+                  meta.fgg.pr3 = stanfit.to.metastats(fgg[[3]], datstan[[3]]),
+                  meta.fgg.pr4 = stanfit.to.metastats(fgg[[4]], datstan[[4]])
+  )
   # -> extract statistics of interest
 
   ### fitting gam.gam.gam prior
-  fits.ggg = lapply(datstan, fit.ggg)
+  ggg = lapply(datstan, fit.ggg)
   for(prior.ind in 1:4){
-    fits.ggg[[prior.ind]]@model_name = "gam.gam.gam" # manually, because not working automatically
+    ggg[[prior.ind]]@model_name = "gam.gam.gam" # manually, because not working automatically
   }
-  # ### fitting fix.log.log prior
-  fits.fll = lapply(datstan, fit.fll)
-  for(prior.ind in 1:4){
-    fits.fll[[prior.ind]]@model_name = "fix.log.log" # manually, because not working automatically
-  }
-  # ### fitting log.log.log prior
-  fits.lll = lapply(datstan, fit.lll)
-  for(prior.ind in 1:4){
-    fits.lll[[prior.ind]]@model_name = "log.log.log" # manually, because not working automatically
-  }
-  # for each of the 16 stanfits
   # -> extract meta statistics and
   # -> extract statistics of interest
-  return(list(fits.fgg, fits.ggg, fits.fll, fits.lll))
+
+
+  # ### fitting fix.log.log prior
+  fll = lapply(datstan, fit.fll)
+  for(prior.ind in 1:4){
+    fll[[prior.ind]]@model_name = "fix.log.log" # manually, because not working automatically
+  }
+  # -> extract meta statistics and
+  # -> extract statistics of interest
+
+
+  # ### fitting log.log.log prior
+  lll = lapply(datstan, fit.lll)
+  for(prior.ind in 1:4){
+    lll[[prior.ind]]@model_name = "log.log.log" # manually, because not working automatically
+  }
+  # -> extract meta statistics and
+  # -> extract statistics of interest
+
+  # bring it in a meaningful order and return as one data.frame row with identifiable colnames.
+  return(meta)
 }
 
 

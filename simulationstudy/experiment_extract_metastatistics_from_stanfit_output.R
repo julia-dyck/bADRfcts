@@ -1,7 +1,10 @@
 ## extract statistics from stanfit object
 
-stanfit.to.metastats = function(stanfit.object, stan.data){
+stanfit.to.metastats = function(stanfit.object, stan.dat){
   obj = stanfit.object
+
+  # seed generated within model fitting
+  mod.seed = rstan::get_seed(obj)
 
   # stancode name
   stancode.name = obj@model_name
@@ -14,11 +17,23 @@ stanfit.to.metastats = function(stanfit.object, stan.data){
   ga.pr.mean = stan.dat$g_expect
   ga.pr.sd = stan.dat$g_stdev
 
-  # seed generated within model fitting
-  mod.seed = rstan::get_seed(obj)
+  run.time = sum(rstan::get_elapsed_time(obj))/60 # in minutes
 
-  run.time = sum(get_elapsed_time(obj))/60 # in minutes
-
-  # HIER WEITER
-
+  metastats = data.frame(mod.seed,
+                         stancode.name,
+                         th.pr.mean,
+                         th.pr.sd,
+                         nu.pr.mean,
+                         nu.pr.sd,
+                         ga.pr.mean,
+                         ga.pr.sd,
+                         run.time)
+  return(metastats)
 }
+
+
+test.meta = stanfit.to.metastats(stanfit.object = test.fit, stan.dat = standat)
+dim(test.meta)
+nrow(test.meta)
+ncol(test.meta)
+colnames(test.meta)

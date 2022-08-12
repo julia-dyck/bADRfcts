@@ -15,7 +15,7 @@
 #'
 
 
-sim.fit.to.one.sample = function(survdat){
+sim.fit.to.1.sample = function(survdat){
   ### Data and prior prep
   datstan = list()
   # 1. prior starting values reflecting hyp: "no adr risk over time"
@@ -49,11 +49,13 @@ sim.fit.to.one.sample = function(survdat){
     fgg[[prior.ind]]@model_name = "fix.gam.gam" # manually, because not working automatically
   }
   # -> extract meta statistics and
-  meta.fgg = list(meta.fgg.pr1 = stanfit.to.metastats(fgg[[1]], datstan[[1]]),
-                  meta.fgg.pr2 = stanfit.to.metastats(fgg[[2]], datstan[[2]]),
-                  meta.fgg.pr3 = stanfit.to.metastats(fgg[[3]], datstan[[3]]),
-                  meta.fgg.pr4 = stanfit.to.metastats(fgg[[4]], datstan[[4]])
-  )
+  meta.fgg.pr1 = stanfit.to.metastats(fgg[[1]], datstan[[1]])
+  meta.fgg.pr2 = stanfit.to.metastats(fgg[[2]], datstan[[2]])
+  meta.fgg.pr3 = stanfit.to.metastats(fgg[[3]], datstan[[3]])
+  meta.fgg.pr4 = stanfit.to.metastats(fgg[[4]], datstan[[4]])
+  return(data.frame(meta.fgg.pr1, meta.fgg.pr2))
+
+}
   # -> extract statistics of interest
 
   ### fitting gam.gam.gam prior
@@ -83,16 +85,18 @@ sim.fit.to.one.sample = function(survdat){
   # -> extract statistics of interest
 
   # bring it in a meaningful order and return as one data.frame row with identifiable colnames.
-  return(meta)
+  return(meta.fgg.pr1)
 }
 
 
 # testing
 start = Sys.time()
-testout = sim.fit.to.one.sample(survdat = testdat) # TESTEN
+testout = sim.fit.to.1.sample(survdat = testdat) # TESTEN
 end = Sys.time()
 testout
 end - start
+
+class(testout)
 
 
 library(rstan)

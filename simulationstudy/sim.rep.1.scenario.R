@@ -41,7 +41,13 @@ test.reps = sim.repeat.1.scenario(scenario.pars = c(10,0.25, 1, 0.05, 365), data
 test.reps
 
 
+# todos:
+# prepare an RData file with
+# ## seeds for the whole simstudy (per scenario a vector of length(reps)
+#    for datagen AND matrix (reps x stanmodels) for posterior sampling
+# ## parcombis per scenario
 
+# add data and fitting seed arguments in all necessary fct.s
 
 
 

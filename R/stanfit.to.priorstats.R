@@ -20,7 +20,7 @@
 #' @export
 #'
 
-stanfit.to.metastats = function(stanfit.object, stan.dat){
+stanfit.to.priorstats = function(stanfit.object, stan.dat){
   obj = stanfit.object
 
   # seed generated within model fitting

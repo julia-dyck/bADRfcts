@@ -49,15 +49,18 @@ sim.fit.to.1.sample = function(survdat){
     fgg[[prior.ind]]@model_name = "fix.gam.gam" # manually, because not working automatically
   }
   # -> extract meta statistics and
-  meta.fgg.pr1 = stanfit.to.metastats(fgg[[1]], datstan[[1]])
-  meta.fgg.pr2 = stanfit.to.metastats(fgg[[2]], datstan[[2]])
-  meta.fgg.pr3 = stanfit.to.metastats(fgg[[3]], datstan[[3]])
-  meta.fgg.pr4 = stanfit.to.metastats(fgg[[4]], datstan[[4]])
+  meta.fgg.pr1 = stanfit.to.priorstats(fgg[[1]], datstan[[1]])
+  post.fgg.pr1 = stanfit.to.poststats(fgg[[1]])
+  cred.fgg.pr1 = stanfit.to.cred.ints(fgg[[1]], cred.niveaus = 0.9)
 
-  return(fgg) ## HIER WEITER
+  meta.fgg.pr2 = stanfit.to.priorstats(fgg[[2]], datstan[[2]])
+  meta.fgg.pr3 = stanfit.to.priorstats(fgg[[3]], datstan[[3]])
+  meta.fgg.pr4 = stanfit.to.priorstats(fgg[[4]], datstan[[4]])
+
+  return(list(fgg[[1]], meta.fgg.pr1, post.fgg.pr1, cred.fgg.pr1)) ## HIER WEITER
 }
   # extract relevant fitting results
-  resu.fgg.pr1.nu =
+  post.fgg.pr1 =
 
 
 

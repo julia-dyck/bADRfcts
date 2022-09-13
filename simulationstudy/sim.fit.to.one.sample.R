@@ -53,7 +53,17 @@ sim.fit.to.1.sample = function(survdat){
   meta.fgg.pr2 = stanfit.to.metastats(fgg[[2]], datstan[[2]])
   meta.fgg.pr3 = stanfit.to.metastats(fgg[[3]], datstan[[3]])
   meta.fgg.pr4 = stanfit.to.metastats(fgg[[4]], datstan[[4]])
-  return(data.frame(meta.fgg.pr1, meta.fgg.pr2))  ### HIER WEITER
+
+  return(fgg) ## HIER WEITER
+}
+  # extract relevant fitting results
+  resu.fgg.pr1.nu =
+
+
+
+  out.fgg = data.frame(fgg.pr1 = meta.fgg.pr1, fgg.pr2 = meta.fgg.pr2)
+
+  return(out.fgg)
 
 }
   # -> extract statistics of interest

@@ -25,9 +25,9 @@
 
 # modelfitting specifications
 # [, -] (sampler/algorithm -> NUTS)
-# [, -] number of chains
-# [, -] posterior sample size per chain
-# [, -] model seed (automatically generated)
+# [, -] (number of chains -> 4 by default)
+# [, -] posterior sample size per chain (set to ????)
+# [, -] model seed (automatically generated) -> to be saved the first time, used for reproductions
 # [, -] elapsed time
 
 # posterior statistics for nu

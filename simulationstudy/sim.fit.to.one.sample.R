@@ -6,7 +6,10 @@
 #'
 #' - fitting all model alternatives
 #'
-#' - extracting and returning relevant statistics from stan output
+#' - extracting and returning relevant statistics from stan output:
+#'   - general information "info" (noch meta), eg. prior mean and sds, fitting specifications etc.
+#'   - information about the posterior distributions of nu and gamma "post"
+#'   - credibility interval information "cred" for the tests
 #'
 #'
 #'

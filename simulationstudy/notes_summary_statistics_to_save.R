@@ -38,14 +38,19 @@
 # [, 15:34] nu.ETIs (nu.ETI.50.l, nu.ETI.50.u, nu.ETI.55.l, nu.ETI.55.u,..., nu.ETI.95.l, nu.ETI.95.u)
 # [, 35:54] nu.HDIs (nu.HDI.50.l, nu.HDI.50.u, nu.HDI.55.l, nu.HDI.55.u,..., nu.HDI.95.l, nu.HDI.95.u)
 # [, 55:154] nu.percentiles to estimate prob mass within ropes (nu.perc.0, nu.perc.1, ..., nu.perc.100)
-# [, 155] nu.n_eff for each parameter
-# [, 156] nu.Rhat for each parameter
-# [, x:y] nu.ETIs (nu.ETI.50.l, nu.ETI.50.u, nu.ETI.55.l, nu.ETI.55.u,..., nu.ETI.95.l, nu.ETI.95.u)
-# [, x:y] nu.HDIs (nu.HDI.50.l, nu.HDI.50.u, nu.HDI.55.l, nu.HDI.55.u,..., nu.HDI.95.l, nu.HDI.95.u)
-# [, x:y] nu.percentiles to estimate prob mass within ropes (nu.perc.0, nu.perc.1, ..., nu.perc.100)
 
 
 # posterior statistics for gamma
+# [, ...] ga.mean
+# [, ...] ga.sd
+# [, 155] ga.n_eff
+# [, 156] ga.Rhat
+# [, x:y] ga.ETIs (ga.ETI.50.l, ga.ETI.50.u, ga.ETI.55.l, ga.ETI.55.u,..., ga.ETI.95.l, ga.ETI.95.u)
+# [, x:y] ga.HDIs (ga.HDI.50.l, ga.HDI.50.u, ga.HDI.55.l, ga.HDI.55.u,..., nu.HDI.95.l, ga.HDI.95.u)
+# [, x:y] ga.percentiles to estimate prob mass within ropes (ga.perc.0, ga.perc.1, ..., ga.perc.100)
+
+
+
 
 
 

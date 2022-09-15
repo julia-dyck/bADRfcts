@@ -51,16 +51,17 @@ sim.fit.to.1.sample = function(survdat){
   for(prior.ind in 1:4){
     fgg[[prior.ind]]@model_name = "fix.gam.gam" # manually, because not working automatically
   }
+  return(fgg) ## HIER WEITER (output für poststats fct)
   # -> extract meta statistics and
-  meta.fgg.pr1 = stanfit.to.priorstats(fgg[[1]], datstan[[1]])
+  prio.fgg.pr1 = stanfit.to.priorstats(fgg[[1]], datstan[[1]])
   post.fgg.pr1 = stanfit.to.poststats(fgg[[1]])
   cred.fgg.pr1 = stanfit.to.cred.ints(fgg[[1]], cred.niveaus = 0.9)
 
-  meta.fgg.pr2 = stanfit.to.priorstats(fgg[[2]], datstan[[2]])
-  meta.fgg.pr3 = stanfit.to.priorstats(fgg[[3]], datstan[[3]])
-  meta.fgg.pr4 = stanfit.to.priorstats(fgg[[4]], datstan[[4]])
+  prio.fgg.pr2 = stanfit.to.priorstats(fgg[[2]], datstan[[2]])
+  prio.fgg.pr3 = stanfit.to.priorstats(fgg[[3]], datstan[[3]])
+  prio.fgg.pr4 = stanfit.to.priorstats(fgg[[4]], datstan[[4]])
 
-  return(list(fgg[[1]], meta.fgg.pr1, post.fgg.pr1, cred.fgg.pr1)) ## HIER WEITER
+  return(list(fgg[[1]], meta.fgg.pr1, post.fgg.pr1, cred.fgg.pr1))
 }
   # extract relevant fitting results
   post.fgg.pr1 =
@@ -105,6 +106,14 @@ sim.fit.to.1.sample = function(survdat){
 }
 
 
+
+
+library(rstan)
+options(mc.cores = parallel::detectCores())
+rstan_options(auto_write = TRUE)
+
+
+
 # testing
 start = Sys.time()
 testout = sim.fit.to.1.sample(survdat = testdat) # TESTEN
@@ -113,11 +122,6 @@ testout
 end - start
 
 class(testout)
-
-
-library(rstan)
-options(mc.cores = parallel::detectCores())
-rstan_options(auto_write = TRUE)
 
 
 ## Achtung: führt zu session aborted

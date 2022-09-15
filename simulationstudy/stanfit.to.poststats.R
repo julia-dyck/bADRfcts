@@ -5,6 +5,11 @@
 
 #'
 #'
+#' Given a stanfit object, the functions extracts statistics about the posterior
+#' distribution of the shape parameters nu and gamma.
+#' These shall give an overview and provide the basis for the adr signal detection
+#' testing.
+#'
 #'
 #'
 #'

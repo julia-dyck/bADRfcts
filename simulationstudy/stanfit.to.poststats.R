@@ -1,24 +1,31 @@
-### extract sample from stanfit output
-### and calculate all credible interval alternatives
-### goal: write a function, that does that for the relevant parameters nu and gamma
-
-
+#' extract posterior summary statistics and credibility intervals
 #'
-#'
-#' Given a stanfit object, the functions extracts statistics about the posterior
+#' Given a stanfit object, the function extracts statistics about the posterior
 #' distribution of the shape parameters nu and gamma.
 #' These shall give an overview and provide the basis for the adr signal detection
-#' testing.
+#' testing in one vector.
 #'
+#' @param stanfit.object the estimated stan model output
+#' @param cred.niveaus
 #'
+#' @return Information about the posterior distributions stored in two vectors
+#' \code{output$nu} and \code{output$ga} each consisting of the following entry parts:
 #'
+#' \item{nu/ga.post.stats}{Summary statistics from the stanfit object about the posterior distribution, namely \code{mean, se_mean, sd},
+#'                  and bayesian convergence diagnostic measures, namely \cod{n_eff, Rhat}}
+#' \item{nu/ga.eti}{equitailed posterior (credibility) intervals specified by their lower and upper boundaries;
+#'                  one interval is derived for each specified credibility niveau}
+#' \item{nu/ga.hdi}{highest posterior density intervals specified by their lower and upper boundaries;
+#'                  one interval is derived for each specified credibility niveau}
+#' \item{nu/ga.per}{percentiles for the posterior density in order to estimate the incorporated probability mass within a
+#'                  specified region of practical equivalence (rope) for the null value of the statistical test that will be
+#'                  conducted after the fitting procedure}
 #'
+#'  @details The storing in one long vector for each parameter is motivated by the
+#'  goal to conduct a simulation study, where all relevant statistics per run ars stored columnwise
+#'  and the repeated runs for one data scenario are store rowwise.
 #'
-#'
-#'
-#'
-#'
-#'
+#' @export
 
 
 
@@ -87,8 +94,7 @@ stanfit.to.poststats = function(stanfit.object, cred.niveaus = seq(0.5, 0.95, by
   names(ga.per) = paste0("ga.per", names(ga.per))
 
   return(list(nu = c(nu.post.stats, nu.eti, nu.hdi, nu.per),
-              ga = c(ga.post.stats, ga.eti, ga.hdi, ga.per))) # format to be adjusted: need long vector with label for each entry
-
+              ga = c(ga.post.stats, ga.eti, ga.hdi, ga.per)))
 }
 
 # function testin --------------------------------------------------------------

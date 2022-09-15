@@ -6,7 +6,7 @@ stanfit.to.poststats = function(stanfit.object){
   obj = stanfit.object
 
   post_summary = summary(obj, pars = c("nu", "gamma"), probs = c())$summary
-  poststats = c(nu = post_summary[1,], ga = post_summary[2,])
+  poststats = list(nu = post_summary[1,], ga = post_summary[2,])
   return(poststats)
 }
 
@@ -14,8 +14,11 @@ stanfit.to.poststats = function(stanfit.object){
 
 # testin
 
-
 test.poststats = stanfit.to.poststats(testout[[1]])
 test.poststats
-as.vector(t(test.poststats))
-c(nu = test.poststats[1,], ga = test.poststats[2,])
+test.poststats$nu
+test.poststats$ga
+
+
+c(nu = test.poststats$nu,
+  ga = test.poststats$ga) # <- reorder list elements within a vector later on like this

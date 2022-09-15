@@ -1,6 +1,6 @@
-#' extract meta  and prior statistics from stanfit object
+#' extract meta and prior statistics from stanfit object
 #'
-#' The function extracts iformation about the model fitting and prior specifications for the parameters to be estimated.
+#' The function extracts information about the model fitting and prior specifications for the parameters to be estimated.
 #'
 #' @param stanfit.object the estimated stan model output
 #' @param stan.dat the data inserted for model fitting
@@ -20,7 +20,7 @@
 #' @export
 #'
 
-stanfit.to.priorstats = function(stanfit.object, stan.dat){
+stanfit.to.fitstats = function(stanfit.object, stan.dat){
   obj = stanfit.object
 
   # seed generated within model fitting
@@ -39,7 +39,7 @@ stanfit.to.priorstats = function(stanfit.object, stan.dat){
 
   run.min = sum(rstan::get_elapsed_time(obj))/60 # in minutes
 
-  metastats = data.frame(mod.seed,
+  fitstats = data.frame(mod.seed,
                          stancode.name,
                          th.pr.mean,
                          th.pr.sd,
@@ -48,7 +48,9 @@ stanfit.to.priorstats = function(stanfit.object, stan.dat){
                          ga.pr.mean,
                          ga.pr.sd,
                          run.min)
-  return(metastats)
+  return(fitstats)
 }
 
-
+# testin
+# testout.fitstats = stanfit.to.fitstats(stanfit.object = testout[[1]], stan.dat = standat)
+# testout.fitstats

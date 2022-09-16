@@ -97,13 +97,15 @@ stanfit.to.poststats = function(stanfit.object, cred.niveaus = seq(0.5, 0.95, by
               ga = c(ga.post.stats, ga.eti, ga.hdi, ga.per)))
 }
 
+
+
+
 # function testin --------------------------------------------------------------
 
 
-stats.out = stanfit.to.poststats(testout[[2]], cred.niveaus = c(0.7,0.8,0.9))
-stats.out
-View(stats.out)
+# stats.out = stanfit.to.poststats(testout[[2]], cred.niveaus = c(0.7,0.8,0.9))
+# stats.out
+# View(stats.out)
 
-# add to package folder when finished
 
 ## END of Doc

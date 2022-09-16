@@ -32,6 +32,7 @@
 
 # function --------------------------------------------------------------------
 stanfit.to.poststats = function(stanfit.object, cred.niveaus = seq(0.5, 0.95, by = 0.05)){
+  require(rstan)
   obj = stanfit.object
 
   ######## extraction of posterior summary stats
@@ -102,8 +103,8 @@ stanfit.to.poststats = function(stanfit.object, cred.niveaus = seq(0.5, 0.95, by
 
 # function testin --------------------------------------------------------------
 
-
-# stats.out = stanfit.to.poststats(testout[[2]], cred.niveaus = c(0.7,0.8,0.9))
+# stanfit.to.poststats(stanfit.object = testout[[1]], cred.niveaus = seq(0.5, 0.95, by = 0.05))
+# stats.out = stanfit.to.poststats(testout[[2]])
 # stats.out
 # View(stats.out)
 

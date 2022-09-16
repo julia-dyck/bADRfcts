@@ -48,32 +48,22 @@ sim.fit.to.1.sample = function(survdat){
 
   ### fitting fix.gam.gam prior
   fgg = lapply(datstan, fit.fgg)
+  return(fgg)}
+  fgg.fitstats = list()
+  fgg.poststats = list()
+  fgg.stats = list()
   for(prior.ind in 1:4){
     fgg[[prior.ind]]@model_name = "fix.gam.gam" # manually, because not working automatically
+    fgg.fitstats[[prior.ind]] = stanfit.to.fitstats(fgg[[prior.ind]], datstan[[prior.ind]])
+    fgg.poststats[[prior.ind]] = stanfit.to.poststats(fgg[[prior.ind]], cred.niveaus = seq(0.5, 0.95, by = 0.05))
+    #already one vector for each table
+    fgg.stats[[prior.ind]] = c(stanfit.to.fitstats(fgg[[prior.ind]], datstan[[prior.ind]]),
+                               stanfit.to.poststats(fgg[[prior.ind]], cred.niveaus = seq(0.5, 0.95, by = 0.05)))
   }
-  return(fgg) ## HIER WEITER (output für poststats fct)
-  # -> extract meta statistics and
-  prio.fgg.pr1 = stanfit.to.priorstats(fgg[[1]], datstan[[1]])
-  post.fgg.pr1 = stanfit.to.poststats(fgg[[1]])
-  cred.fgg.pr1 = stanfit.to.cred.ints(fgg[[1]], cred.niveaus = 0.9)
-
-  prio.fgg.pr2 = stanfit.to.priorstats(fgg[[2]], datstan[[2]])
-  prio.fgg.pr3 = stanfit.to.priorstats(fgg[[3]], datstan[[3]])
-  prio.fgg.pr4 = stanfit.to.priorstats(fgg[[4]], datstan[[4]])
-
-  return(list(fgg[[1]], meta.fgg.pr1, post.fgg.pr1, cred.fgg.pr1))
+  return(fgg.stats)
 }
-  # extract relevant fitting results
-  post.fgg.pr1 =
 
-
-
-  out.fgg = data.frame(fgg.pr1 = meta.fgg.pr1, fgg.pr2 = meta.fgg.pr2)
-
-  return(out.fgg)
-
-}
-  # -> extract statistics of interest
+# include, once it works for fgg HIER WEITER
 
   ### fitting gam.gam.gam prior
   ggg = lapply(datstan, fit.ggg)
@@ -102,7 +92,7 @@ sim.fit.to.1.sample = function(survdat){
   # -> extract statistics of interest
 
   # bring it in a meaningful order and return as one data.frame row with identifiable colnames.
-  return(meta.fgg.pr1)
+  return(...)
 }
 
 

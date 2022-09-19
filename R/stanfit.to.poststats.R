@@ -87,7 +87,7 @@ stanfit.to.poststats = function(stanfit.object, cred.niveaus = seq(0.5, 0.95, by
   ga.hdi = c(t(ga.hdi)) # transform to vector
   names(ga.hdi) = paste0("ga.hdi",rep(cred.niveaus, each = 2), rep(c("l","u"), times = length(cred.niveaus)) )
 
-  # calculate percentilec
+  # calculate percentiles
 
   nu.per = quantile(post.sample$nu, probs = (0:100)/100)
   names(nu.per) = paste0("nu.per", names(nu.per))
@@ -95,8 +95,10 @@ stanfit.to.poststats = function(stanfit.object, cred.niveaus = seq(0.5, 0.95, by
   ga.per = quantile(post.sample$gamma, probs = (0:100)/100)
   names(ga.per) = paste0("ga.per", names(ga.per))
 
-  return(c(nu.post.stats, nu.eti, nu.hdi, nu.per,
-           ga.post.stats, ga.eti, ga.hdi, ga.per))
+ ret.vect = t(as.data.frame(c(nu.post.stats, nu.eti, nu.hdi, nu.per,
+                              ga.post.stats, ga.eti, ga.hdi, ga.per)))
+ rownames(ret.vect) = NULL
+ return(ret.vect)
 }
 
 
@@ -107,7 +109,7 @@ stanfit.to.poststats = function(stanfit.object, cred.niveaus = seq(0.5, 0.95, by
 # stanfit.to.poststats(stanfit.object = testout[[1]], cred.niveaus = seq(0.5, 0.95, by = 0.05))
 # stats.out = stanfit.to.poststats(testout[[2]])
 # stats.out
+# dim(stats.out)
 # View(stats.out)
-
 
 ## END of Doc

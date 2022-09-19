@@ -36,7 +36,7 @@ stanfit.to.poststats = function(stanfit.object, cred.niveaus = seq(0.5, 0.95, by
   obj = stanfit.object
 
   ######## extraction of posterior summary stats
-  post_summary = summary(obj, pars = c("nu", "gamma"), probs = c())$summary
+  post_summary = rstan::summary(obj, pars = c("nu", "gamma"), probs = c())$summary
   poststats = list(nu = post_summary[1,], ga = post_summary[2,])
 
   nu.post.stats = poststats$nu
@@ -103,7 +103,7 @@ stanfit.to.poststats = function(stanfit.object, cred.niveaus = seq(0.5, 0.95, by
 
 # function testin --------------------------------------------------------------
 
-# stanfit.to.poststats(stanfit.object = testout[[1]], cred.niveaus = seq(0.5, 0.95, by = 0.05))
+# stanfit.to.poststats(stanfit.object = testout[[1]], cred.niveaus = seq(0.9, 0.95, by = 0.05))
 # stats.out = stanfit.to.poststats(testout[[2]])
 # stats.out
 # View(stats.out)

@@ -8,8 +8,9 @@
 #' @param stanfit.object the estimated stan model output
 #' @param cred.niveaus
 #'
-#' @return Information about the posterior distributions stored in two vectors
-#' \code{output$nu} and \code{output$ga} each consisting of the following entry parts:
+#' @return Information about the posterior distributions stored in a vector
+#'         consisting of the following entry parts first for parameter nu followed by the same statistics regarding
+#'         parameter gamma:
 #'
 #' \item{nu/ga.post.stats}{Summary statistics from the stanfit object about the posterior distribution, namely \code{mean, se_mean, sd},
 #'                  and bayesian convergence diagnostic measures, namely \cod{n_eff, Rhat}}
@@ -94,8 +95,8 @@ stanfit.to.poststats = function(stanfit.object, cred.niveaus = seq(0.5, 0.95, by
   ga.per = quantile(post.sample$gamma, probs = (0:100)/100)
   names(ga.per) = paste0("ga.per", names(ga.per))
 
-  return(list(nu = c(nu.post.stats, nu.eti, nu.hdi, nu.per),
-              ga = c(ga.post.stats, ga.eti, ga.hdi, ga.per)))
+  return(c(nu.post.stats, nu.eti, nu.hdi, nu.per,
+           ga.post.stats, ga.eti, ga.hdi, ga.per))
 }
 
 

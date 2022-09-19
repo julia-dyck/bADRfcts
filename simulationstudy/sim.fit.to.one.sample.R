@@ -9,7 +9,9 @@
 #' - extracting and returning relevant statistics from stan output:
 #'   - general information "info" (noch meta), eg. prior mean and sds, fitting specifications etc.
 #'   - information about the posterior distributions of nu and gamma "post"
-#'   - credibility interval information "cred" for the tests
+#'   - credibility intervals for the tests (will be conducted afterwards)
+#'   - 0 to 100 percentiles of the posterior distribution (to roughly estimate the
+#'     probability mass within the region of practical equivalence for the null value)
 #'
 #'
 #'
@@ -48,18 +50,19 @@ sim.fit.to.1.sample = function(survdat){
 
   ### fitting fix.gam.gam prior
   fgg = lapply(datstan, fit.fgg)
-  return(fgg)}
-  fgg.fitstats = list()
-  fgg.poststats = list()
+  ### extracting relevant statistics
   fgg.stats = list()
   for(prior.ind in 1:4){
     fgg[[prior.ind]]@model_name = "fix.gam.gam" # manually, because not working automatically
-    fgg.fitstats[[prior.ind]] = stanfit.to.fitstats(fgg[[prior.ind]], datstan[[prior.ind]])
-    fgg.poststats[[prior.ind]] = stanfit.to.poststats(fgg[[prior.ind]], cred.niveaus = seq(0.5, 0.95, by = 0.05))
     #already one vector for each table
-    fgg.stats[[prior.ind]] = c(stanfit.to.fitstats(fgg[[prior.ind]], datstan[[prior.ind]]),
-                               stanfit.to.poststats(fgg[[prior.ind]], cred.niveaus = seq(0.5, 0.95, by = 0.05)))
+    fgg.stats[[prior.ind]] = cbind(stanfit.to.fitstats(fgg[[prior.ind]], datstan[[prior.ind]]),
+                               as.data.frame(stanfit.to.poststats(fgg[[prior.ind]],
+                                                                  cred.niveaus = seq(0.5, 0.95, by = 0.05))))
   }
+  # HIER WEITER
+  # ## aus der liste entweder vier Tabellen machen...
+  # ## oder nochmal einen langen Vector (macht mehr sinn, dann für ein sample
+  #    eine riesige Zeile mit den ERgebnissen aus allen 16 Modellen)
   return(fgg.stats)
 }
 
@@ -106,12 +109,14 @@ rstan_options(auto_write = TRUE)
 
 # testing
 start = Sys.time()
-testout = sim.fit.to.1.sample(survdat = testdat) # TESTEN
+testft1s = sim.fit.to.1.sample(survdat = testdat) # TESTEN
 end = Sys.time()
-testout
+testft1s[[1]]
 end - start
 
-class(testout)
+class(testft1s[[1]])
+dim(testft1s[[1]])
+View(testft1s[[1]])
 
 
 ## Achtung: führt zu session aborted
@@ -132,7 +137,7 @@ fit <- rstan::stan(
   refresh = 0             # no progress shown
 )
 
-summary(fit)$summary
+rstan::summary(fit)$summary
 
 ## END OF DOC
 

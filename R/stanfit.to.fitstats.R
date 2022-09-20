@@ -20,7 +20,7 @@
 #' @export
 #'
 
-stanfit.to.fitstats = function(stanfit.object, stan.dat){
+stanfit.to.fitstats = function(stanfit.object, stan.dat, assumed.pr){
   obj = stanfit.object
 
   # seed generated within model fitting
@@ -30,6 +30,7 @@ stanfit.to.fitstats = function(stanfit.object, stan.dat){
   stancode.name = obj@model_name
 
   # prior specifications
+  adr.assumption = assumed.pr
   th.pr.mean = stan.dat$t_expect
   th.pr.sd = stan.dat$t_stdev
   nu.pr.mean = stan.dat$n_expect
@@ -41,6 +42,7 @@ stanfit.to.fitstats = function(stanfit.object, stan.dat){
 
   fitstats = data.frame(mod.seed,
                          stancode.name,
+                         adr.assumption,
                          th.pr.mean,
                          th.pr.sd,
                          nu.pr.mean,
@@ -52,5 +54,6 @@ stanfit.to.fitstats = function(stanfit.object, stan.dat){
 }
 
 # testin
-# testout.fitstats = stanfit.to.fitstats(stanfit.object = testout[[1]], stan.dat = standat)
+# testout.fitstats = stanfit.to.fitstats(stanfit.object = testout[[1]], stan.dat = standat, assumed.pr = "none")
 # testout.fitstats
+# str(testout.fitstats)

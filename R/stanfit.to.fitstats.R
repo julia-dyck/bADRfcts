@@ -9,6 +9,7 @@
 #' @return Information about the model fitting, such as:
 #' \item{model.seed}{the seed was generated and set to make the posterior samples reproducible}
 #' \item{stancode.name}{to identify the used model}
+#' \item{adr.assumption}{to identify which adr case is assumed a priori}
 #' \item{th.pr.mean}{prior mean of parameter theta}
 #' \item{th.pr.sd}{prior standard deviation of parameter theta}
 #' \item{nu.pr.mean}{prior mean of parameter nu}

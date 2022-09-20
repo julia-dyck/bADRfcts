@@ -20,7 +20,7 @@
 #'
 
 
-sim.fit.to.1.sample = function(survdat){
+sim.fit.to.1.sample = function(survdat, sample.seed = NULL){
   ### Data and prior prep
   datstan = list()
   # 1. prior starting values reflecting hyp: "no adr risk over time"
@@ -35,7 +35,7 @@ sim.fit.to.1.sample = function(survdat){
                                      scale.mean = 1, scale.sd = 10,
                                      shape.mean = 0.5, shape.sd = 10,
                                      powershape.mean = 1, powershape.sd = 10)
-  # 3. prior starting values reflecting hyp: "adr occuring towards end of observatin period"
+  # 3. prior starting values reflecting hyp: "adr occuring towards end of observation period"
   # data reformatting
   datstan[[3]] = survdat2pgwstanmodeldat(dat = survdat,
                                      scale.mean = 365, scale.sd = 10,
@@ -47,23 +47,26 @@ sim.fit.to.1.sample = function(survdat){
                                      scale.mean = 12, scale.sd = 10,
                                      shape.mean = 5, shape.sd = 10,
                                      powershape.mean = 15, powershape.sd = 10)
+  adr.assumption = c("none", "beginning", "end", "middle")
 
-  ### fitting fix.gam.gam prior
+  ### fitting fix.gam.gam model
   fgg = lapply(datstan, fit.fgg)
   ### extracting relevant statistics
+
   fgg.stats = list()
   for(prior.ind in 1:4){
     fgg[[prior.ind]]@model_name = "fix.gam.gam" # manually, because not working automatically
     #already one vector for each table
-    fgg.stats[[prior.ind]] = cbind(stanfit.to.fitstats(fgg[[prior.ind]], datstan[[prior.ind]]),
-                               as.data.frame(stanfit.to.poststats(fgg[[prior.ind]],
-                                                                  cred.niveaus = seq(0.5, 0.95, by = 0.05))))
+    fgg.stats[[prior.ind]] = cbind(stanfit.to.fitstats(fgg[[prior.ind]], datstan[[prior.ind]], adr.assumption[prior.ind]),
+                                   as.data.frame(stanfit.to.poststats(fgg[[prior.ind]],
+                                                                      cred.niveaus = seq(0.5, 0.95, by = 0.05))))
   }
   # HIER WEITER
   # ## aus der liste entweder vier Tabellen machen...
   # ## oder nochmal einen langen Vector (macht mehr sinn, dann für ein sample
   #    eine riesige Zeile mit den ERgebnissen aus allen 16 Modellen)
-  return(fgg.stats)
+  #return(fgg.stats)
+   return(rbind(fgg.stats[[1]], fgg.stats[[2]], fgg.stats[[3]], fgg.stats[[4]]))
 }
 
 # include, once it works for fgg HIER WEITER
@@ -108,17 +111,18 @@ rstan_options(auto_write = TRUE)
 
 
 # testing
-start = Sys.time()
+
 testft1s = sim.fit.to.1.sample(survdat = testdat) # TESTEN
-end = Sys.time()
-testft1s[[1]]
-end - start
+testft1s
+View(testft1s)
 
 class(testft1s[[1]])
 dim(testft1s[[1]])
 View(testft1s[[1]])
 
-
+long.out = cbind(testft1s[[1]], testft1s[[2]])
+dim(long.out)
+View(long.out)
 ## Achtung: führt zu session aborted
 # fit <- rstan::sampling(stanmodel.pgw.fix.gam.gam.repar, data = standat, iter = 500,
 #                      warmup = 100, chains = 4, cores = 4)

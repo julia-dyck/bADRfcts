@@ -12,8 +12,9 @@ stanfit.to.poststats(stanfit.object, cred.niveaus = seq(0.5, 0.95, by = 0.05))
 \item{cred.niveaus}{}
 }
 \value{
-Information about the posterior distributions stored in two vectors
-\code{output$nu} and \code{output$ga} each consisting of the following entry parts:
+Information about the posterior distributions stored in a vector
+        consisting of the following entry parts first for parameter nu followed by the same statistics regarding
+        parameter gamma:
 
 \item{nu/ga.post.stats}{Summary statistics from the stanfit object about the posterior distribution, namely \code{mean, se_mean, sd},
                  and bayesian convergence diagnostic measures, namely \cod{n_eff, Rhat}}

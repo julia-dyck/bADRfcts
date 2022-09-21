@@ -7,7 +7,6 @@
 #'
 #'
 #' @return Information about the model fitting, such as:
-#' \item{model.seed}{the seed was generated and set to make the posterior samples reproducible}
 #' \item{stancode.name}{to identify the used model}
 #' \item{adr.assumption}{to identify which adr case is assumed a priori}
 #' \item{th.pr.mean}{prior mean of parameter theta}
@@ -16,6 +15,7 @@
 #' \item{nu.pr.sd}{prior standard deviation of parameter nu}
 #' \item{ga.pr.mean}{prior mean of parameter gamma}
 #' \item{ga.pr.sd}{prior standard deviation of parameter gamma}
+#' \item{model.seed}{the seed was generated and set to make the posterior samples reproducible}
 #' \item{run.min}{running time in minutes}
 #'
 #' @export
@@ -41,16 +41,16 @@ stanfit.to.fitstats = function(stanfit.object, stan.dat, assumed.pr){
 
   run.min = sum(rstan::get_elapsed_time(obj))/60 # in minutes
 
-  fitstats = data.frame(mod.seed,
-                         stancode.name,
-                         adr.assumption,
-                         th.pr.mean,
-                         th.pr.sd,
-                         nu.pr.mean,
-                         nu.pr.sd,
-                         ga.pr.mean,
-                         ga.pr.sd,
-                         run.min)
+  fitstats = data.frame(stancode.name,
+                        adr.assumption,
+                        th.pr.mean,
+                        th.pr.sd,
+                        nu.pr.mean,
+                        nu.pr.sd,
+                        ga.pr.mean,
+                        ga.pr.sd,
+                        mod.seed,
+                        run.min)
   return(fitstats)
 }
 

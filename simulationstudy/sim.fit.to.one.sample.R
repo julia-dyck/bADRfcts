@@ -52,57 +52,73 @@ sim.fit.to.1.sample = function(survdat, sample.seed = NULL){
   ### fitting fix.gam.gam model
   fgg = lapply(datstan, fit.fgg)
   ### extracting relevant statistics
-
   fgg.stats = list()
   for(prior.ind in 1:4){
     fgg[[prior.ind]]@model_name = "fix.gam.gam" # manually, because not working automatically
-    #already one vector for each table
-    fgg.stats[[prior.ind]] = cbind(stanfit.to.fitstats(fgg[[prior.ind]], datstan[[prior.ind]], adr.assumption[prior.ind]),
-                                   as.data.frame(stanfit.to.poststats(fgg[[prior.ind]],
+    #already one stats vector per fit in a list
+    fgg.stats[[prior.ind]] = cbind(as.data.frame(sample.seed = sample.seed),
+                                   stanfit.to.fitstats(stanfit.object = fgg[[prior.ind]],
+                                                       stan.dat = datstan[[prior.ind]],
+                                                       assumed.pr = adr.assumption[prior.ind]),
+                                   as.data.frame(stanfit.to.poststats(stanfit.object = fgg[[prior.ind]],
                                                                       cred.niveaus = seq(0.5, 0.95, by = 0.05))))
   }
-  # HIER WEITER
-  # ## aus der liste entweder vier Tabellen machen...
-  # ## oder nochmal einen langen Vector (macht mehr sinn, dann für ein sample
-  #    eine riesige Zeile mit den ERgebnissen aus allen 16 Modellen)
-  #return(fgg.stats)
-   return(rbind(fgg.stats[[1]], fgg.stats[[2]], fgg.stats[[3]], fgg.stats[[4]]))
-}
+  return(fgg.stats)
 
-# include, once it works for fgg HIER WEITER
-
-  ### fitting gam.gam.gam prior
+  ### fitting gam.gam.gam model
   ggg = lapply(datstan, fit.ggg)
+  ### extracting relevant statistics
+  ggg.stats = list()
   for(prior.ind in 1:4){
     ggg[[prior.ind]]@model_name = "gam.gam.gam" # manually, because not working automatically
+    #already one stats vector per fit in a list
+    ggg.stats[[prior.ind]] = cbind(sample.seed = sample.seed,
+                                   stanfit.to.fitstats(stanfit.object = ggg[[prior.ind]],
+                                                       stan.dat = datstan[[prior.ind]],
+                                                       assumed.pr = adr.assumption[prior.ind]),
+                                   as.data.frame(stanfit.to.poststats(stanfit.object = ggg[[prior.ind]],
+                                                                      cred.niveaus = seq(0.5, 0.95, by = 0.05))))
   }
-  # -> extract meta statistics and
-  # -> extract statistics of interest
 
 
-  # ### fitting fix.log.log prior
+  ### fitting fix.log.log model
   fll = lapply(datstan, fit.fll)
+  ### extracting relevant statistics
+  fll.stats = list()
   for(prior.ind in 1:4){
     fll[[prior.ind]]@model_name = "fix.log.log" # manually, because not working automatically
+    #already one stats vector per fit in a list
+    fll.stats[[prior.ind]] = cbind(sample.seed = sample.seed,
+                                   stanfit.to.fitstats(stanfit.object = fll[[prior.ind]],
+                                                       stan.dat = datstan[[prior.ind]],
+                                                       assumed.pr = adr.assumption[prior.ind]),
+                                   as.data.frame(stanfit.to.poststats(stanfit.object = fll[[prior.ind]],
+                                                                      cred.niveaus = seq(0.5, 0.95, by = 0.05))))
   }
-  # -> extract meta statistics and
-  # -> extract statistics of interest
 
-
-  # ### fitting log.log.log prior
+  ### fitting log.log.log model
   lll = lapply(datstan, fit.lll)
+  ### extracting relevant statistics
+  lll.stats = list()
   for(prior.ind in 1:4){
     lll[[prior.ind]]@model_name = "log.log.log" # manually, because not working automatically
+    #already one stats vector per fit in a list
+    lll.stats[[prior.ind]] = cbind(sample.seed = sample.seed,
+                                   stanfit.to.fitstats(stanfit.object = lll[[prior.ind]],
+                                                       stan.dat = datstan[[prior.ind]],
+                                                       assumed.pr = adr.assumption[prior.ind]),
+                                   as.data.frame(stanfit.to.poststats(stanfit.object = lll[[prior.ind]],
+                                                                      cred.niveaus = seq(0.5, 0.95, by = 0.05))))
   }
-  # -> extract meta statistics and
-  # -> extract statistics of interest
 
-  # bring it in a meaningful order and return as one data.frame row with identifiable colnames.
-  return(...)
+  stats.list = c(fgg.stats, ggg.stats, fll.stats, lll.stats)
+
+  return(stats.list)
+  #return(rbind(fgg.stats[[1]], fgg.stats[[2]], fgg.stats[[3]], fgg.stats[[4]]))
 }
 
 
-
+#  testing ---------------------------------------------------------------------
 
 library(rstan)
 options(mc.cores = parallel::detectCores())
@@ -112,17 +128,17 @@ rstan_options(auto_write = TRUE)
 
 # testing
 
-testft1s = sim.fit.to.1.sample(survdat = testdat) # TESTEN
+testft1s = sim.fit.to.1.sample(survdat = testdat, sample.seed = 123) # TESTEN
 testft1s
-View(testft1s)
+summary(testft1s)
 
-class(testft1s[[1]])
-dim(testft1s[[1]])
-View(testft1s[[1]])
 
-long.out = cbind(testft1s[[1]], testft1s[[2]])
+
+long.out = rbind(testft1s[[1]], testft1s[[2]])
+test.df = do.call("rbind", testft1s)
+
 dim(long.out)
-View(long.out)
+View(test.df)
 ## Achtung: führt zu session aborted
 # fit <- rstan::sampling(stanmodel.pgw.fix.gam.gam.repar, data = standat, iter = 500,
 #                      warmup = 100, chains = 4, cores = 4)

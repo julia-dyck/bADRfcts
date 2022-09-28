@@ -129,6 +129,12 @@ rstan_options(auto_write = TRUE)
 # testing
 
 testft1s = sim.fit.to.1.sample(survdat = testdat, sample.seed = 123) # TESTEN
+# TODO: sample.seed wieder heraus nehmen. Das stielt Zeit, hat nicht wirklich mehrwert und
+# macht alles umständlicher. Odile hat schon recht. Der Code zum Laufen lassen sollte
+# bereit gestellt werden, damit man die Sim laufen lassen kann und sieht, ob die
+# Average ergebnisse sich reproduzieren lassen, statt den code mit denselben seeds laufen
+# zu lassen. Davon hat man nichts, außer vllt die gewissheit, dass der
+# bereitgestellte Code wirklich das macht, was versprochen wurde.
 testft1s
 summary(testft1s)
 

@@ -20,7 +20,7 @@
 #'
 
 
-sim.fit.to.1.sample = function(survdat, sample.seed = NULL){
+sim.fit.to.1.sample = function(survdat){
   ### Data and prior prep
   datstan = list()
   # 1. prior starting values reflecting hyp: "no adr risk over time"
@@ -56,8 +56,7 @@ sim.fit.to.1.sample = function(survdat, sample.seed = NULL){
   for(prior.ind in 1:4){
     fgg[[prior.ind]]@model_name = "fix.gam.gam" # manually, because not working automatically
     #already one stats vector per fit in a list
-    fgg.stats[[prior.ind]] = cbind(as.data.frame(sample.seed = sample.seed),
-                                   stanfit.to.fitstats(stanfit.object = fgg[[prior.ind]],
+    fgg.stats[[prior.ind]] = cbind(stanfit.to.fitstats(stanfit.object = fgg[[prior.ind]],
                                                        stan.dat = datstan[[prior.ind]],
                                                        assumed.pr = adr.assumption[prior.ind]),
                                    as.data.frame(stanfit.to.poststats(stanfit.object = fgg[[prior.ind]],
@@ -72,8 +71,7 @@ sim.fit.to.1.sample = function(survdat, sample.seed = NULL){
   for(prior.ind in 1:4){
     ggg[[prior.ind]]@model_name = "gam.gam.gam" # manually, because not working automatically
     #already one stats vector per fit in a list
-    ggg.stats[[prior.ind]] = cbind(sample.seed = sample.seed,
-                                   stanfit.to.fitstats(stanfit.object = ggg[[prior.ind]],
+    ggg.stats[[prior.ind]] = cbind(stanfit.to.fitstats(stanfit.object = ggg[[prior.ind]],
                                                        stan.dat = datstan[[prior.ind]],
                                                        assumed.pr = adr.assumption[prior.ind]),
                                    as.data.frame(stanfit.to.poststats(stanfit.object = ggg[[prior.ind]],
@@ -88,8 +86,7 @@ sim.fit.to.1.sample = function(survdat, sample.seed = NULL){
   for(prior.ind in 1:4){
     fll[[prior.ind]]@model_name = "fix.log.log" # manually, because not working automatically
     #already one stats vector per fit in a list
-    fll.stats[[prior.ind]] = cbind(sample.seed = sample.seed,
-                                   stanfit.to.fitstats(stanfit.object = fll[[prior.ind]],
+    fll.stats[[prior.ind]] = cbind(stanfit.to.fitstats(stanfit.object = fll[[prior.ind]],
                                                        stan.dat = datstan[[prior.ind]],
                                                        assumed.pr = adr.assumption[prior.ind]),
                                    as.data.frame(stanfit.to.poststats(stanfit.object = fll[[prior.ind]],
@@ -103,8 +100,7 @@ sim.fit.to.1.sample = function(survdat, sample.seed = NULL){
   for(prior.ind in 1:4){
     lll[[prior.ind]]@model_name = "log.log.log" # manually, because not working automatically
     #already one stats vector per fit in a list
-    lll.stats[[prior.ind]] = cbind(sample.seed = sample.seed,
-                                   stanfit.to.fitstats(stanfit.object = lll[[prior.ind]],
+    lll.stats[[prior.ind]] = cbind(stanfit.to.fitstats(stanfit.object = lll[[prior.ind]],
                                                        stan.dat = datstan[[prior.ind]],
                                                        assumed.pr = adr.assumption[prior.ind]),
                                    as.data.frame(stanfit.to.poststats(stanfit.object = lll[[prior.ind]],
@@ -128,7 +124,7 @@ rstan_options(auto_write = TRUE)
 
 # testing
 
-testft1s = sim.fit.to.1.sample(survdat = testdat, sample.seed = 123) # TESTEN
+testft1s = sim.fit.to.1.sample(survdat = testdat) # TESTEN
 # TODO: sample.seed wieder heraus nehmen. Das stielt Zeit, hat nicht wirklich mehrwert und
 # macht alles umständlicher. Odile hat schon recht. Der Code zum Laufen lassen sollte
 # bereit gestellt werden, damit man die Sim laufen lassen kann und sieht, ob die

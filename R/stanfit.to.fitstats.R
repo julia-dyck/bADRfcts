@@ -15,7 +15,6 @@
 #' \item{nu.pr.sd}{prior standard deviation of parameter nu}
 #' \item{ga.pr.mean}{prior mean of parameter gamma}
 #' \item{ga.pr.sd}{prior standard deviation of parameter gamma}
-#' \item{model.seed}{the seed was generated and set to make the posterior samples reproducible}
 #' \item{run.min}{running time in minutes}
 #'
 #' @export
@@ -23,9 +22,6 @@
 
 stanfit.to.fitstats = function(stanfit.object, stan.dat, assumed.pr){
   obj = stanfit.object
-
-  # seed generated within model fitting
-  mod.seed = rstan::get_seed(obj)
 
   # stancode name
   stancode.name = obj@model_name
@@ -49,7 +45,6 @@ stanfit.to.fitstats = function(stanfit.object, stan.dat, assumed.pr){
                         nu.pr.sd,
                         ga.pr.mean,
                         ga.pr.sd,
-                        mod.seed,
                         run.min)
   return(fitstats)
 }

@@ -21,7 +21,6 @@ Information about the model fitting, such as:
 \item{nu.pr.sd}{prior standard deviation of parameter nu}
 \item{ga.pr.mean}{prior mean of parameter gamma}
 \item{ga.pr.sd}{prior standard deviation of parameter gamma}
-\item{model.seed}{the seed was generated and set to make the posterior samples reproducible}
 \item{run.min}{running time in minutes}
 }
 \description{

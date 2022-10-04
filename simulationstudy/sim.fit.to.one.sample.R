@@ -13,6 +13,9 @@
 #'   - 0 to 100 percentiles of the posterior distribution (to roughly estimate the
 #'     probability mass within the region of practical equivalence for the null value)
 #'
+#' @param survdat time-event-sample
+#'
+#' @return a data frame with 16 rows. Each row contains statistics for one of the 4x4 prior and model alternatives.
 #'
 #'
 #'
@@ -62,7 +65,7 @@ sim.fit.to.1.sample = function(survdat){
                                    as.data.frame(stanfit.to.poststats(stanfit.object = fgg[[prior.ind]],
                                                                       cred.niveaus = seq(0.5, 0.95, by = 0.05))))
   }
-  return(fgg.stats)
+
 
   ### fitting gam.gam.gam model
   ggg = lapply(datstan, fit.ggg)
@@ -106,11 +109,12 @@ sim.fit.to.1.sample = function(survdat){
                                    as.data.frame(stanfit.to.poststats(stanfit.object = lll[[prior.ind]],
                                                                       cred.niveaus = seq(0.5, 0.95, by = 0.05))))
   }
-
+  # gather the output rows
+  # store in a data.frame
   stats.list = c(fgg.stats, ggg.stats, fll.stats, lll.stats)
+  stats.df = do.call(what = "rbind", stats.list)
+  return(stats.df)
 
-  return(stats.list)
-  #return(rbind(fgg.stats[[1]], fgg.stats[[2]], fgg.stats[[3]], fgg.stats[[4]]))
 }
 
 
@@ -125,21 +129,16 @@ rstan_options(auto_write = TRUE)
 # testing
 
 testft1s = sim.fit.to.1.sample(survdat = testdat) # TESTEN
-# TODO: sample.seed wieder heraus nehmen. Das stielt Zeit, hat nicht wirklich mehrwert und
-# macht alles umständlicher. Odile hat schon recht. Der Code zum Laufen lassen sollte
-# bereit gestellt werden, damit man die Sim laufen lassen kann und sieht, ob die
-# Average ergebnisse sich reproduzieren lassen, statt den code mit denselben seeds laufen
-# zu lassen. Davon hat man nichts, außer vllt die gewissheit, dass der
-# bereitgestellte Code wirklich das macht, was versprochen wurde.
+
 testft1s
 summary(testft1s)
 
 
 
 long.out = rbind(testft1s[[1]], testft1s[[2]])
-test.df = do.call("rbind", testft1s)
+test.df = do.call(what = "rbind", args = testft1s)
 
-dim(long.out)
+dim(test.df)
 View(test.df)
 ## Achtung: führt zu session aborted
 # fit <- rstan::sampling(stanmodel.pgw.fix.gam.gam.repar, data = standat, iter = 500,

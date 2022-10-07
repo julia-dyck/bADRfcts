@@ -1,31 +1,19 @@
 ### repeat the datageneration to fitting and results output fct
 
 
-sim.repeat.1.scenario = function(scenario.pars, datagenseed.vect = NULL, reps = 100){
+sim.repeat.1.scenario = function(scenario.pars, reps = 100){
   # scenario.pars[1] = sample size
   # scenario.pars[2] = backround rate
   # scenario.pars[3] = ADR rate
   # scenario.pars[4] = relative st. dev. of ADR
   # scenario.pars[5] = censoring time
 
-  # datagenseed.vect = vector with seeds to reproduce the simulation study results
-  #                    not necessary the first time.
-
   # reps = number of repetitions for this scenario
 
-  if(!is.null(datagenseed.vect)){
-    reps = length(datagenseed.vect)
-  }
-  else{
-    datagenseed.vect = sample.int(n = 100000000, size = reps, replace = T)
-  }
 
-  gendata.given.sc = function(datagen.seed){
-    # set seed for data generation
-    set.seed(datagen.seed)
+  gendata.and.fit = function(scenario.pars){
     # simulate data set based on given scenario
     sim.dat = bADRfcts::datagenUnifBr(genpar = scenario.pars)
-    ###set.seed(Sys.time())
     # fit models
     fit.output = sim.fit.to.1.sample(sim.dat)
     # hier alle steps bis zum output pro rep einfügen.
@@ -43,11 +31,8 @@ test.reps
 
 # todos:
 # prepare an RData file with
-# ## seeds for the whole simstudy (per scenario a vector of length(reps)
-#    for datagen AND matrix (reps x stanmodels) for posterior sampling
-# ## parcombis per scenario
 
-# add data and fitting seed arguments in all necessary fct.s
+# ## parcombis per scenario
 
 
 

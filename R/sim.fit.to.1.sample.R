@@ -18,7 +18,7 @@
 #' @return a data frame with 16 rows. Each row contains statistics for one of the 4x4 prior and model alternatives.
 #'
 #'
-#'
+#' @export
 #'
 #'
 

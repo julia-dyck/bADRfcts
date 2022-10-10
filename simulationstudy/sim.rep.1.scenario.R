@@ -1,7 +1,23 @@
-### repeat the datageneration to fitting and results output fct
+#' Simulation study: replicate one scenario
+#'
+#' repeat the datageneration and fitting and results output for
+#' one scenario parameter combination
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+#' @export
+#'
+#'
 
 
-sim.repeat.1.scenario = function(scenario.pars, reps = 100){
+sim.repeat.1.scenario = function(scenario.pars, reps = 100, save = T, path = if(save ==T){getwd()}){
   # scenario.pars[1] = sample size
   # scenario.pars[2] = backround rate
   # scenario.pars[3] = ADR rate
@@ -21,15 +37,29 @@ sim.repeat.1.scenario = function(scenario.pars, reps = 100){
     return(fit.output)
   }
 
-  out = replicate(n = reps, expr = gendata.and.fit(), simplify = F)
-  out = do.call(what = "rbind",  out)
+  raw.sim.table = replicate(n = reps, expr = gendata.and.fit(), simplify = F)
+  raw.sim.table = do.call(what = "rbind", raw.sim.table)
 
-  return(out)
+  if(save == T){
+    filename = paste(c(scenario.pars, "bADR_sim.RData") ,collapse="_")
+    save(raw.sim.table, file=paste0(path, "/", filename))
+  }
+
+  if(save == F){
+    return(raw.sim.table)
+  }
 }
 
 
 #### testing
-test.reps = sim.repeat.1.scenario(scenario.pars = c(10,0.25, 1, 0.05, 365), reps = 2)
+sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
+                      reps = 2,
+                      save = T,
+                      path = "C:/Users/jdyck/sciebo/ADR_bayes_R/Simstudy_output_pilot")
+
+test.reps = sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
+                                  reps = 2,
+                                  save = F)
 test.reps
 dim(test.reps)
 str(test.reps)

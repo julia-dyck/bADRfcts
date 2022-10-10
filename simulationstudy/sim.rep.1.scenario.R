@@ -21,21 +21,19 @@ sim.repeat.1.scenario = function(scenario.pars, reps = 100){
     return(fit.output)
   }
 
-  out = replicate(n = reps, expr = gendata.and.fit, )
+  out = replicate(n = reps, expr = gendata.and.fit(), simplify = F)
+  out = do.call(what = "rbind",  out)
 
-    rep(gendata.and.fit, times = reps)
   return(out)
 }
 
+
+#### testing
 test.reps = sim.repeat.1.scenario(scenario.pars = c(10,0.25, 1, 0.05, 365), reps = 2)
 test.reps
-
-
-# todos:
-# prepare an RData file with
-
-# ## parcombis per scenario
-
+dim(test.reps)
+str(test.reps)
+View(test.reps)
 
 
 

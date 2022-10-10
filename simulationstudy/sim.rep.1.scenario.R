@@ -52,18 +52,18 @@ sim.repeat.1.scenario = function(scenario.pars, reps = 100, save = T, path = if(
 
 
 #### testing
-sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
-                      reps = 2,
-                      save = T,
-                      path = "C:/Users/jdyck/sciebo/ADR_bayes_R/Simstudy_output_pilot")
-
-test.reps = sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
-                                  reps = 2,
-                                  save = F)
-test.reps
-dim(test.reps)
-str(test.reps)
-View(test.reps)
+# sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
+#                       reps = 2,
+#                       save = T,
+#                       path = "C:/Users/jdyck/sciebo/ADR_bayes_R/Simstudy_output_pilot")
+#
+# test.reps = sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
+#                                   reps = 2,
+#                                   save = F)
+# test.reps
+# dim(test.reps)
+# str(test.reps)
+# View(test.reps)
 
 
 

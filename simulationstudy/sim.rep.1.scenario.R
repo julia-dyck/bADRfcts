@@ -11,7 +11,7 @@ sim.repeat.1.scenario = function(scenario.pars, reps = 100){
   # reps = number of repetitions for this scenario
 
 
-  gendata.and.fit = function(scenario.pars){
+  gendata.and.fit = function(){
     # simulate data set based on given scenario
     sim.dat = bADRfcts::datagenUnifBr(genpar = scenario.pars)
     # fit models
@@ -21,11 +21,13 @@ sim.repeat.1.scenario = function(scenario.pars, reps = 100){
     return(fit.output)
   }
 
-  out = t(sapply(datagenseed.vect, gendata.given.sc))
+  out = replicate(n = reps, expr = gendata.and.fit, )
+
+    rep(gendata.and.fit, times = reps)
   return(out)
 }
 
-test.reps = sim.repeat.1.scenario(scenario.pars = c(10,0.25, 1, 0.05, 365), datagenseed.vect = NULL, reps = 2)
+test.reps = sim.repeat.1.scenario(scenario.pars = c(10,0.25, 1, 0.05, 365), reps = 2)
 test.reps
 
 

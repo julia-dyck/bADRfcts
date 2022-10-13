@@ -14,11 +14,11 @@ fit.fgg = function(datstan){
     file = "stanfiles/fix.gam.gam.stan",  # Stan program
     model_name = "fix.gam.gam.model", # model name
     data = datstan,    # named list of data
-    chains = 1,             # number of Markov chains
-    warmup = 100,          # number of warmup iterations per chain
-    iter = 150,            # total number of iterations per chain
+    chains = 4,             # number of Markov chains
+    warmup = 1000,          # number of warmup iterations per chain
+    iter = 5000,            # total number of iterations per chain
     cores = getOption("mc.cores", 1L) - 1,              # number of cores (one per chain)
-    refresh = 1             # progress shown
+    refresh = -1             # progress not shown
   )
   return(output)
 }
@@ -45,10 +45,10 @@ fit.ggg = function(datstan){
   model_name = "gam.gam.gam.model", # model name
   data = datstan,    # named list of data
   chains = 4,             # number of Markov chains
-  warmup = 100,          # number of warmup iterations per chain
-  iter = 150,            # total number of iterations per chain
+  warmup = 1000,          # number of warmup iterations per chain
+  iter = 5000,            # total number of iterations per chain
   cores = getOption("mc.cores", 1L) - 1,              # number of cores (one per chain)
-  refresh = 1             # progress shown
+  refresh = -1             # progress not shown
   )
   return(output)
 }
@@ -70,11 +70,11 @@ fit.fll = function(datstan){
     file = "stanfiles/fix.gam.gam.stan",  # Stan program
     model_name = "fix.log.log.model", # model name
     data = datstan,    # named list of data
-    chains = 1,             # number of Markov chains
-    warmup = 100,          # number of warmup iterations per chain
-    iter = 150,            # total number of iterations per chain
-    cores = getOption("mc.cores", 1L) - 1,     # number of cores (one per chain)
-    refresh = 1             # progress shown
+    chains = 4,             # number of Markov chains
+    warmup = 1000,          # number of warmup iterations per chain
+    iter = 5000,            # total number of iterations per chain
+    cores = getOption("mc.cores", 1L) - 1,              # number of cores (one per chain)
+    refresh = -1             # progress not shown
   )
   return(output)
 }
@@ -97,10 +97,10 @@ fit.lll = function(datstan){
     model_name = "log.log.log.model", # model name
     data = datstan,    # named list of data
     chains = 4,             # number of Markov chains
-    warmup = 100,          # number of warmup iterations per chain
-    iter = 150,            # total number of iterations per chain
+    warmup = 1000,          # number of warmup iterations per chain
+    iter = 5000,            # total number of iterations per chain
     cores = getOption("mc.cores", 1L) - 1,              # number of cores (one per chain)
-    refresh = 1             # progress shown
+    refresh = -1             # progress not shown
   )
   return(output)
 }

@@ -24,13 +24,14 @@ pc.pilot
 
 # run the simulation -----------------------------------------------------------
 
-# on office pc:
 
-apply(pc.pilot, 1, sim.repeat.1.scenario,
+apply(pc.pilot[1:2,], 1, sim.repeat.1.scenario,
       reps = 2,
       save = T,
       path = "C:/Users/jdyck/sciebo/bADR_simstudyres_pilot"
       )
+
+
 
 
 

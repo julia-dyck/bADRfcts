@@ -25,8 +25,8 @@ sim.repeat.1.scenario = function(scenario.pars, reps = 100, save = T, path = if(
   # scenario.pars[5] = censoring time
 
   # reps = number of repetitions for this scenario
-
-
+  # save = whether output is to be saved in a specified file (T) or in the global environment (F)
+  # path = where to save the output if save = T
   gendata.and.fit = function(){
     # simulate data set based on given scenario
     sim.dat = bADRfcts::datagenUnifBr(genpar = scenario.pars)

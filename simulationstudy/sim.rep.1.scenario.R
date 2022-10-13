@@ -15,14 +15,16 @@
 #'         posterior sample statistics of the simulation runs (statistics are
 #'         gathered using the \code{stanfit.to.fitstats} and \code{stanfit.to.poststats}
 #'         function).
-#'
-#'
-#'
+#'                      generating scenario. See function \code{datagenUnifBr} for
+#'                      details.
+#' @param reps number of repeated simulations for one scenario
+#' @param save logical
 #'
 #'
 #' @export
 #'
 #'
+
 
 
 sim.repeat.1.scenario = function(scenario.pars, reps = 100, save = T, path = if(save ==T){getwd()}){

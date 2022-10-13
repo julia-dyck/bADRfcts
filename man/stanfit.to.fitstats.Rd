@@ -4,7 +4,7 @@
 \alias{stanfit.to.fitstats}
 \title{extract meta and prior statistics from stanfit object}
 \usage{
-stanfit.to.fitstats(stanfit.object, stan.dat, assumed.pr)
+stanfit.to.fitstats(stanfit.object, stan.dat, assumed.pr, adr.gen.mean.time)
 }
 \arguments{
 \item{stanfit.object}{the estimated stan model output}
@@ -15,6 +15,8 @@ stanfit.to.fitstats(stanfit.object, stan.dat, assumed.pr)
 Information about the model fitting, such as:
 \item{stancode.name}{to identify the used model}
 \item{adr.assumption}{to identify which adr case is assumed a priori}
+\item{adr.gen.mean.time}{to reflect, which adr prior assumption
+      would be most fitting theoretically}
 \item{th.pr.mean}{prior mean of parameter theta}
 \item{th.pr.sd}{prior standard deviation of parameter theta}
 \item{nu.pr.mean}{prior mean of parameter nu}

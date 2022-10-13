@@ -4,7 +4,7 @@
 \alias{sim.fit.to.1.sample}
 \title{Simstudy: apply all models to one specific sample}
 \usage{
-sim.fit.to.1.sample(survdat)
+sim.fit.to.1.sample(dat)
 }
 \arguments{
 \item{survdat}{time-event-sample}

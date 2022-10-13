@@ -18,7 +18,8 @@ datagenUnifBr(genpar)
        }}
 }
 \value{
-A simulated time-event data frame of size n.
+A simulated time-event data frame of size n; the mean of the adr-generated
+        events.
 }
 \description{
 Simulation of data (same as for non-Bayesian approach)

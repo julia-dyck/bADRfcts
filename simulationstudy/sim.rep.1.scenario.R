@@ -27,12 +27,13 @@ sim.repeat.1.scenario = function(scenario.pars, reps = 100, save = T, path = if(
   # reps = number of repetitions for this scenario
   # save = whether output is to be saved in a specified file (T) or in the global environment (F)
   # path = where to save the output if save = T
+
+  # internal fct:
   gendata.and.fit = function(){
-    # simulate data set based on given scenario
+    # 1. simulate data set based on given scenario
     sim.dat = bADRfcts::datagenUnifBr(genpar = scenario.pars)
-    # fit models
+    # 2. fit models
     fit.output = sim.fit.to.1.sample(sim.dat)
-    # hier alle steps bis zum output pro rep einfügen.
 
     return(fit.output)
   }
@@ -52,11 +53,19 @@ sim.repeat.1.scenario = function(scenario.pars, reps = 100, save = T, path = if(
 
 
 #### testing
+# # on the office pc
 # sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
 #                       reps = 2,
 #                       save = T,
-#                       path = "C:/Users/jdyck/sciebo/ADR_bayes_R/Simstudy_output_pilot")
+#                       path = "C:/Users/jdyck/sciebo/bADR_simstudyres_pilot")
 #
+# # on the laptop
+# sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
+#                       reps = 2,
+#                       save = T,
+#                       path = "D:/Sciebo/bADR_simstudyres_pilot")
+#
+# # output in environment
 # test.reps = sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
 #                                   reps = 2,
 #                                   save = F)

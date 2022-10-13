@@ -41,7 +41,8 @@
 #'        See details for more information.
 #'        }
 #'
-#' @return A simulated time-event data frame of size n.
+#' @return A simulated time-event data frame of size n; the mean of the adr-generated
+#'         events.
 #' @export
 #'
 #'
@@ -80,5 +81,5 @@ datagenUnifBr = function(genpar){
   time = ceiling(time)
   dat = data.frame(time, status)
   # print(c(length(t.br), length(t.adr),table(status)))
-  return(dat)
+  return(list(data = dat, mean.adr.time = m.adr))
 }

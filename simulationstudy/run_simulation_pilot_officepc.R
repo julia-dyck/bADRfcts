@@ -6,7 +6,7 @@
 # install.packages("rstan") <- correct version, specify from where!!!
 library(rstan)
 parallel::detectCores() # how many cores are available?
-options(mc.cores = parallel::detectCores()) # adjust potentially (e.g.
+options(mc.cores = 8) # adjust potentially (e.g.
                                             # explicit nr for server runs)
 rstan_options(auto_write = TRUE)
 

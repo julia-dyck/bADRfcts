@@ -3,14 +3,16 @@
 
 # load necessary packages ------------------------------------------------------
 
-# install.packages("rstan") <- correct version, specify from where!!!
+# install.packages("rstan")
 library(rstan)
 parallel::detectCores() # how many cores are available?
 options(mc.cores = 12) # adjust potentially (e.g.
 # explicit nr for server runs)
 rstan_options(auto_write = TRUE)
 
-# devtools::install_github(repo = "julia-dyck/bADRfcts") <- does the command work?
+install.packages("devtools")
+library(devtools)
+devtools::install_github(repo = "julia-dyck/bADRfcts")
 library(bADRfcts)
 
 

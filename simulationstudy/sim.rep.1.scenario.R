@@ -1,9 +1,13 @@
 #' Simulation study: replicate one scenario
 #'
-#' repeat the datageneration and fitting and results output for
+#' repeat the data generation and fitting and results output for
 #' one scenario parameter combination
 #'
-#'
+#' @param scenario.pars Vector with parametervalues, that specify the data
+#'                      generating scenario. See function \code{datagenUnifBr} for
+#'                      details.
+#' @param reps number of repeated simulations for one scenario
+#' @param save logical
 #'
 #'
 #'

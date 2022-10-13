@@ -9,6 +9,8 @@
 #' @return Information about the model fitting, such as:
 #' \item{stancode.name}{to identify the used model}
 #' \item{adr.assumption}{to identify which adr case is assumed a priori}
+#' \item{adr.gen.mean.time}{to reflect, which adr prior assumption
+#'       would be most fitting theoretically}
 #' \item{th.pr.mean}{prior mean of parameter theta}
 #' \item{th.pr.sd}{prior standard deviation of parameter theta}
 #' \item{nu.pr.mean}{prior mean of parameter nu}
@@ -20,11 +22,14 @@
 #' @export
 #'
 
-stanfit.to.fitstats = function(stanfit.object, stan.dat, assumed.pr){
+stanfit.to.fitstats = function(stanfit.object, stan.dat, assumed.pr, adr.gen.mean.time){
   obj = stanfit.object
 
   # stancode name
   stancode.name = obj@model_name
+
+  # true mean of the adr generating normal distribution
+  adr.gen.mean.time = adr.gen.mean.time
 
   # prior specifications
   adr.assumption = assumed.pr
@@ -39,6 +44,7 @@ stanfit.to.fitstats = function(stanfit.object, stan.dat, assumed.pr){
 
   fitstats = data.frame(stancode.name,
                         adr.assumption,
+                        adr.gen.mean.time,
                         th.pr.mean,
                         th.pr.sd,
                         nu.pr.mean,
@@ -50,6 +56,6 @@ stanfit.to.fitstats = function(stanfit.object, stan.dat, assumed.pr){
 }
 
 # testin
-# testout.fitstats = stanfit.to.fitstats(stanfit.object = testout[[1]], stan.dat = standat, assumed.pr = "none")
+# testout.fitstats = stanfit.to.fitstats(stanfit.object = testout[[1]], stan.dat = standat, assumed.pr = "none", adr.gen.mean.time = 45)
 # testout.fitstats
 # str(testout.fitstats)

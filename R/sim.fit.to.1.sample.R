@@ -23,7 +23,11 @@
 #'
 
 
-sim.fit.to.1.sample = function(survdat){
+sim.fit.to.1.sample = function(dat){
+  #
+  survdat = dat$data
+  m.adr = dat$mean.adr.time
+
   ### Data and prior prep
   datstan = list()
   # 1. prior starting values reflecting hyp: "no adr risk over time"
@@ -61,7 +65,8 @@ sim.fit.to.1.sample = function(survdat){
     #already one stats vector per fit in a list
     fgg.stats[[prior.ind]] = cbind(stanfit.to.fitstats(stanfit.object = fgg[[prior.ind]],
                                                        stan.dat = datstan[[prior.ind]],
-                                                       assumed.pr = adr.assumption[prior.ind]),
+                                                       assumed.pr = adr.assumption[prior.ind],
+                                                       adr.gen.mean.time = m.adr),
                                    as.data.frame(stanfit.to.poststats(stanfit.object = fgg[[prior.ind]],
                                                                       cred.niveaus = seq(0.5, 0.95, by = 0.05))))
   }
@@ -76,7 +81,8 @@ sim.fit.to.1.sample = function(survdat){
     #already one stats vector per fit in a list
     ggg.stats[[prior.ind]] = cbind(stanfit.to.fitstats(stanfit.object = ggg[[prior.ind]],
                                                        stan.dat = datstan[[prior.ind]],
-                                                       assumed.pr = adr.assumption[prior.ind]),
+                                                       assumed.pr = adr.assumption[prior.ind],
+                                                       adr.gen.mean.time = m.adr),
                                    as.data.frame(stanfit.to.poststats(stanfit.object = ggg[[prior.ind]],
                                                                       cred.niveaus = seq(0.5, 0.95, by = 0.05))))
   }
@@ -91,7 +97,8 @@ sim.fit.to.1.sample = function(survdat){
     #already one stats vector per fit in a list
     fll.stats[[prior.ind]] = cbind(stanfit.to.fitstats(stanfit.object = fll[[prior.ind]],
                                                        stan.dat = datstan[[prior.ind]],
-                                                       assumed.pr = adr.assumption[prior.ind]),
+                                                       assumed.pr = adr.assumption[prior.ind],
+                                                       adr.gen.mean.time = m.adr),
                                    as.data.frame(stanfit.to.poststats(stanfit.object = fll[[prior.ind]],
                                                                       cred.niveaus = seq(0.5, 0.95, by = 0.05))))
   }
@@ -105,7 +112,8 @@ sim.fit.to.1.sample = function(survdat){
     #already one stats vector per fit in a list
     lll.stats[[prior.ind]] = cbind(stanfit.to.fitstats(stanfit.object = lll[[prior.ind]],
                                                        stan.dat = datstan[[prior.ind]],
-                                                       assumed.pr = adr.assumption[prior.ind]),
+                                                       assumed.pr = adr.assumption[prior.ind],
+                                                       adr.gen.mean.time = m.adr),
                                    as.data.frame(stanfit.to.poststats(stanfit.object = lll[[prior.ind]],
                                                                       cred.niveaus = seq(0.5, 0.95, by = 0.05))))
   }
@@ -124,7 +132,7 @@ sim.fit.to.1.sample = function(survdat){
 # options(mc.cores = parallel::detectCores())
 # rstan_options(auto_write = TRUE)
 #
-# testft1s = sim.fit.to.1.sample(survdat = testdat) # TESTEN
+# testft1s = sim.fit.to.1.sample(dat = testdatlist) # TESTEN
 # testft1s
 
 

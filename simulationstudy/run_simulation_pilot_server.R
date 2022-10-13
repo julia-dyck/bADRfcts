@@ -6,8 +6,8 @@
 # install.packages("rstan") <- correct version, specify from where!!!
 library(rstan)
 parallel::detectCores() # how many cores are available?
-options(mc.cores = parallel::detectCores()) # adjust potentially (e.g.
-                                            # explicit nr for server runs)
+options(mc.cores = 12) # adjust potentially (e.g.
+# explicit nr for server runs)
 rstan_options(auto_write = TRUE)
 
 # devtools::install_github(repo = "julia-dyck/bADRfcts") <- does the command work?
@@ -24,13 +24,12 @@ pc.pilot
 
 # run the simulation -----------------------------------------------------------
 
-# on office pc:
+save(testobject = 1:10, file = "/home/jdyck/ownCloud/bADR_simstudyres_pilot/test.object.RData")
 
-apply(pc.pilot, 1, sim.repeat.1.scenario,
-      reps = 2,
-      save = T,
-      path = "C:/Users/jdyck/sciebo/bADR_simstudyres_pilot"
-      )
-
+# apply(pc.pilot[1:2,], 1, sim.repeat.1.scenario,
+#       reps = 2,
+#       save = T,
+#       path = "/home/jdyck/ownCloud/bADR_simstudyres_pilot"
+# )
 
 

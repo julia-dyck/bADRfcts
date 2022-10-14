@@ -26,7 +26,7 @@ pc.pilot
 
 
 apply(pc.pilot[16:18,], 1, sim.repeat.1.scenario,
-      reps = 100,
+      reps = 10,
       save = T,
       path = "C:/Users/jdyck/sciebo/bADR_simstudyres_pilot"
       )

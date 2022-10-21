@@ -37,8 +37,20 @@ stanfit.to.poststats = function(stanfit.object, cred.niveaus = seq(0.5, 0.95, by
   obj = stanfit.object
 
   ######## extraction of posterior summary stats
+
+  # add in: "if the scale parameter is fittet: ...
+  if( ncol(as.matrix(stanfit.object)) == 4 ){
+    post_summary = rstan::summary(obj, pars = c("theta", "nu", "gamma"), probs = c())$summary
+    poststats = list(th = post_summary[1,], nu = post_summary[2,], ga = post_summary[3,])
+  }
+  # else (ie. if the scale parameter is fix):
+  if( ncol(as.matrix(stanfit.object)) == 3 ){
   post_summary = rstan::summary(obj, pars = c("nu", "gamma"), probs = c())$summary
-  poststats = list(nu = post_summary[1,], ga = post_summary[2,])
+  poststats = list(th = rep(NA, 5), nu = post_summary[1,], ga = post_summary[2,])
+  }
+
+  th.post.stats = poststats$th
+  names(th.post.stats) = paste0("th.po.", names(poststats$nu))
 
   nu.post.stats = poststats$nu
   names(nu.post.stats) = paste0("nu.po.", names(nu.post.stats))
@@ -95,7 +107,8 @@ stanfit.to.poststats = function(stanfit.object, cred.niveaus = seq(0.5, 0.95, by
   ga.per = quantile(post.sample$gamma, probs = (0:100)/100)
   names(ga.per) = paste0("ga.per", names(ga.per))
 
- ret.vect = t(as.data.frame(c(nu.post.stats, nu.eti, nu.hdi, nu.per,
+ ret.vect = t(as.data.frame(c(th.post.stats,
+                              nu.post.stats, nu.eti, nu.hdi, nu.per,
                               ga.post.stats, ga.eti, ga.hdi, ga.per)))
  rownames(ret.vect) = NULL
  return(ret.vect)

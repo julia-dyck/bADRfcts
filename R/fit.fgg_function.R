@@ -16,7 +16,7 @@ fit.fgg = function(datstan){
     data = datstan,    # named list of data
     chains = 4,             # number of Markov chains
     warmup = 1000,          # number of warmup iterations per chain
-    iter = 5000,            # total number of iterations per chain
+    iter = 6000,            # total number of iterations per chain (including warmup)
     cores = getOption("mc.cores", 1L) - 1,              # number of cores (one per chain)
     refresh = -1             # progress not shown
   )
@@ -46,7 +46,7 @@ fit.ggg = function(datstan){
   data = datstan,    # named list of data
   chains = 4,             # number of Markov chains
   warmup = 1000,          # number of warmup iterations per chain
-  iter = 5000,            # total number of iterations per chain
+  iter = 6000,            # total number of iterations per chain (including warmup)
   cores = getOption("mc.cores", 1L) - 1,              # number of cores (one per chain)
   refresh = -1             # progress not shown
   )
@@ -72,7 +72,7 @@ fit.fll = function(datstan){
     data = datstan,    # named list of data
     chains = 4,             # number of Markov chains
     warmup = 1000,          # number of warmup iterations per chain
-    iter = 5000,            # total number of iterations per chain
+    iter = 6000,            # total number of iterations per chain (including warmup)
     cores = getOption("mc.cores", 1L) - 1,              # number of cores (one per chain)
     refresh = -1             # progress not shown
   )
@@ -98,7 +98,7 @@ fit.lll = function(datstan){
     data = datstan,    # named list of data
     chains = 4,             # number of Markov chains
     warmup = 1000,          # number of warmup iterations per chain
-    iter = 5000,            # total number of iterations per chain
+    iter = 6000,            # total number of iterations per chain (including warmup)
     cores = getOption("mc.cores", 1L) - 1,              # number of cores (one per chain)
     refresh = -1             # progress not shown
   )

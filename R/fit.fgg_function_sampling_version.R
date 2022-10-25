@@ -5,7 +5,7 @@
 #'
 #' WICHTIG: warmup (1000) und iter (6000) muss noch angepasst werden!
 #'
-#'
+#' @export
 #'
 
 

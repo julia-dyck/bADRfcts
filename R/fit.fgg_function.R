@@ -86,7 +86,7 @@ fit.fll = function(datstan){
 #'
 #' WICHTIG: warmup (1000) und iter (15000) muss noch angepasst werden!
 #'
-#' @export
+#'
 #'
 
 

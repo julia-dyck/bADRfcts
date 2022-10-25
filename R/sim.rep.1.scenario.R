@@ -41,7 +41,7 @@ sim.repeat.1.scenario = function(scenario.pars, reps = 100, save = T, path = if(
   # internal fct:
   gendata.and.fit = function(){
     # 1. simulate data set based on given scenario
-    sim.dat = bADRfcts::datagenUnifBr(genpar = scenario.pars)
+    sim.dat = datagenUnifBr(genpar = scenario.pars)
     # 2. fit models
     fit.output = sim.fit.to.1.sample(sim.dat)
 

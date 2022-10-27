@@ -9,17 +9,31 @@
 #'
 
 
-fit.fgg = function(datstan){
-  output = rstan::stan(
-    file = "stanfiles/fix.gam.gam.stan",  # Stan program
-    model_name = "fix.gam.gam.model", # model name
-    data = datstan,    # named list of data
-    chains = 4,             # number of Markov chains
-    warmup = 100,          # number of warmup iterations per chain
-    iter = 600,            # total number of iterations per chain (including warmup)
-    cores = 1,              # number of cores
-    refresh = -1             # progress not shown
-  )
+fit.fgg = function(datstan, fst.fit = F){
+  if(fst.fit == T){
+    output = rstan::stan(
+      file = "stanfiles/fix.gam.gam.stan",  # Stan program
+      model_name = "fix.gam.gam.model", # model name
+      data = datstan,    # named list of data
+      chains = 4,             # number of Markov chains
+      warmup = 100,          # number of warmup iterations per chain
+      iter = 600,            # total number of iterations per chain (including warmup)
+      cores = 1,              # number of cores
+      refresh = -1             # progress not shown
+    )
+  }
+  else{
+    output = rstan::stan(
+      fit = fst.fit.fgg,  # Stan program
+      model_name = "fix.gam.gam.model", # model name
+      data = datstan,    # named list of data
+      chains = 4,             # number of Markov chains
+      warmup = 100,          # number of warmup iterations per chain
+      iter = 600,            # total number of iterations per chain (including warmup)
+      cores = 1,              # number of cores
+      refresh = -1             # progress not shown
+    )
+  }
   return(output)
 }
 

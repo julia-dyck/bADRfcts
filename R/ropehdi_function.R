@@ -50,34 +50,34 @@ ropehdi = function(nullregion, credregion){
     if(nullregupp < credreglow){ # meaning: Nullregion left from ci, no intersection
       rej.nullvalue = TRUE
       acc.nullvalue = FALSE
-      print("nullreg and credible interval disjunct, nullregion left")
+      # print("nullreg and credible interval disjunct, nullregion left")
     }
     else if(nullregupp > credreglow && nullregupp < credregupp){ # meaning: Nullregion left from cr, but partly intersecting
       rej.nullvalue = FALSE
       acc.nullvalue = FALSE
-      print("partial overlap, nullregion left")
+      # print("partial overlap, nullregion left")
     }
     else if(nullregupp > credregupp){ # meaning: Nullregion contains whole ci
       rej.nullvalue = FALSE
       acc.nullvalue = TRUE
-      print("nullreg contains the whole credible interval")
+      # print("nullreg contains the whole credible interval")
     }
   }
   else{ # check: else lower nullregion boundary is right from lower ci boundary
     if(nullreglow > credregupp){ # null region completely lies right from ci
       rej.nullvalue = TRUE
       acc.nullvalue = FALSE
-      print("nullreg and credible interval disjunct, nullregion right")
+      # print("nullreg and credible interval disjunct, nullregion right")
     }
     else if(nullregupp > credregupp){ # null region right from cr, but partly intersecting
       rej.nullvalue = FALSE
       acc.nullvalue = FALSE
-      print("partial overlap, null region right from credregion")
+      # print("partial overlap, null region right from credregion")
     }
     else if(nullregupp < credregupp){ # ci encompasses null region
       rej.nullvalue = FALSE
       acc.nullvalue = FALSE
-      print("nullregion encompassed by cred region")
+      # print("nullregion encompassed by cred region")
     }
   }
 

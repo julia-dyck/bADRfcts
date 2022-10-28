@@ -55,7 +55,7 @@ load("data/first.fits.RData")
 load("data/testdat.RData")
 
 
-
+save.image("simulationstudy/bundle_functions_dataobjects.RData")
 
 
 

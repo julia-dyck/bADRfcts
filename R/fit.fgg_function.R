@@ -5,7 +5,7 @@
 #'
 #' WICHTIG: warmup (1000) und iter (15000) muss noch angepasst werden!
 #'
-#' @export
+#'
 #'
 
 
@@ -34,7 +34,6 @@ fit.fgg = function(datstan){
 #'
 #' WICHTIG: warmup (1000) und iter (15000) muss noch angepasst werden!
 #'
-#' @export
 #'
 
 
@@ -59,8 +58,6 @@ fit.ggg = function(datstan){
 #' Within a simulation study, the function can be run in parallel on various prior meta-parameter specifications or datasets.
 #'
 #' WICHTIG: warmup (1000) und iter (15000) muss noch angepasst werden!
-#'
-#' @export
 #'
 
 

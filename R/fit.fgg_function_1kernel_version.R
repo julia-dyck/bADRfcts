@@ -159,7 +159,7 @@ fit.fll = function(datstan, fst.fit = F){
 
 
 
-fit.lll = function(datstan), fst.fit = F){
+fit.lll = function(datstan, fst.fit = F){
     if(fst.fit == T){
       output = rstan::stan(
         file = "stanfiles/log.log.log.stan",  # Stan program

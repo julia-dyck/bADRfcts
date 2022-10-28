@@ -17,8 +17,6 @@
 #'         function).
 #'                      generating scenario. See function \code{datagenUnifBr} for
 #'                      details.
-#' @param reps number of repeated simulations for one scenario
-#' @param save logical
 #'
 #'
 #' @export
@@ -27,7 +25,9 @@
 
 
 
-sim.repeat.1.scenario = function(scenario.pars, reps = 100, save = T, path = if(save ==T){getwd()}){
+sim.repeat.1.scenario = function(counter.vect = 1:100,
+                                 scenario.pars,
+                                 path = getwd()){
   # scenario.pars[1] = sample size
   # scenario.pars[2] = backround rate
   # scenario.pars[3] = ADR rate
@@ -37,52 +37,35 @@ sim.repeat.1.scenario = function(scenario.pars, reps = 100, save = T, path = if(
   # reps = number of repetitions for this scenario
   # save = whether output is to be saved in a specified file (T) or in the global environment (F)
   # path = where to save the output if save = T
+  #------------------------------
 
-  # internal fct:
-  gendata.and.fit = function(){
-    # 1. simulate data set based on given scenario
-    sim.dat = datagenUnifBr(genpar = scenario.pars)
-    # 2. fit models
-    fit.output = sim.fit.to.1.sample(sim.dat)
-
-    return(fit.output)
-  }
-
-  raw.sim.table = replicate(n = reps, expr = gendata.and.fit(), simplify = F)
-  raw.sim.table = do.call(what = "rbind", raw.sim.table)
-
-  if(save == T){
-    filename = paste(c(scenario.pars, "bADR_sim.RData") ,collapse="_")
-    save(raw.sim.table, file=paste0(path, "/", filename))
-  }
-
-  if(save == F){
-    return(raw.sim.table)
-  }
+  sapply(counter.vect, sim.1.scenario.1.time,
+        scenario.pars = scenario.pars,
+        save = T,
+        path = path
+        )
 }
 
 
-#### testing
-# # on the office pc
-# sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
-#                       reps = 2,
-#                       save = T,
-#                       path = "C:/Users/jdyck/sciebo/bADR_simstudyres_pilot")
-#
-# # on the laptop
-# sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
-#                       reps = 2,
-#                       save = T,
-#                       path = "D:/Sciebo/bADR_simstudyres_pilot")
-#
-# # output in environment
-# test.reps = sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
-#                                   reps = 2,
-#                                   save = F)
-# test.reps
-# dim(test.reps)
-# str(test.reps)
-# View(test.reps)
+### testing
+# on the office pc
+sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
+                      reps = 2,
+                      save = T,
+                      path = "C:/Users/jdyck/sciebo/bADR_simstudyres_pilot")
+
+# on the laptop
+sim.repeat.1.scenario(counter.vect = 3:4, scenario.pars = c(100,0.25, 1, 0.05, 365),
+                      path = "D:/Sciebo/bADR_simstudyres_pilot")
+
+# output in environment
+test.reps = sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
+                                  reps = 2,
+                                  save = F)
+test.reps
+dim(test.reps)
+str(test.reps)
+View(test.reps)
 
 
 

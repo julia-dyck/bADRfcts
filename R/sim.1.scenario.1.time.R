@@ -64,12 +64,12 @@ sim.1.scenario.1.time = function(counter,
 
 # testit
 
-sim.1.scenario.1.time(counter = 1,
-                      scenario.pars = c(100, 0.1, 1, 0.05, 365),
-                      save = T,
-                      path = "simulationstudy"
-                      )
-
-
-
+# sim.1.scenario.1.time(counter = 1,
+#                       scenario.pars = c(100, 0.1, 1, 0.05, 365),
+#                       save = T,
+#                       path = "simulationstudy"
+#                       )
+#
+#
+#
 

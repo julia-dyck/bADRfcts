@@ -47,26 +47,26 @@ sim.repeat.1.scenario = function(counter.vect = 1:100,
 }
 
 
-### testing
-# on the office pc
-sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
-                      reps = 2,
-                      save = T,
-                      path = "C:/Users/jdyck/sciebo/bADR_simstudyres_pilot")
-
-# on the laptop
-sim.repeat.1.scenario(counter.vect = 3:4, scenario.pars = c(100,0.25, 1, 0.05, 365),
-                      path = "D:/Sciebo/bADR_simstudyres_pilot")
-
-# output in environment
-test.reps = sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
-                                  reps = 2,
-                                  save = F)
-test.reps
-dim(test.reps)
-str(test.reps)
-View(test.reps)
-
+# ### testing
+# # on the office pc
+# sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
+#                       reps = 2,
+#                       save = T,
+#                       path = "C:/Users/jdyck/sciebo/bADR_simstudyres_pilot")
+#
+# # on the laptop
+# sim.repeat.1.scenario(counter.vect = 3:4, scenario.pars = c(100,0.25, 1, 0.05, 365),
+#                       path = "D:/Sciebo/bADR_simstudyres_pilot")
+#
+# # output in environment
+# test.reps = sim.repeat.1.scenario(scenario.pars = c(100,0.25, 1, 0.05, 365),
+#                                   reps = 2,
+#                                   save = F)
+# test.reps
+# dim(test.reps)
+# str(test.reps)
+# View(test.reps)
+#
 
 
 

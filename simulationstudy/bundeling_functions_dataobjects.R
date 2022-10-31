@@ -30,6 +30,8 @@ source("R/rpgw_function.R")
 
 source("R/sim.fit.to.1.sample.R")
 
+source("R/sim.1.scenario.1.time.R")
+
 source("R/sim.rep.1.scenario.R")
 
 source("R/spgw_function.R")

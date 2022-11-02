@@ -34,7 +34,6 @@ apply(pc.pilot[16:18,], 1, sim.repeat.1.scenario,
       path = "C:/Users/jdyck/sciebo/bADR_simstudyres_pilot"
       )
 
-
-
+sim.repeat.1.scenario(pc.pilot[10,])
 
 

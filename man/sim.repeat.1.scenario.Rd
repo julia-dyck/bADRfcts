@@ -4,25 +4,19 @@
 \alias{sim.repeat.1.scenario}
 \title{Simulation study: replicate one scenario}
 \usage{
-sim.repeat.1.scenario(
-  scenario.pars,
-  reps = 100,
-  save = T,
-  path = if (save == T) {
-     getwd()
- }
-)
+sim.repeat.1.scenario(counter.vect = 1:100, scenario.pars, path = getwd())
 }
 \arguments{
 \item{scenario.pars}{Vector with parametervalues, that specify the data
 generating scenario. See function \code{datagenUnifBr} for
 details.}
 
+\item{path}{file path specifying where to save the output if save = T}
+
 \item{reps}{number of repeated simulations for one scenario}
 
-\item{save}{logical}
-
-\item{path}{file path specifying where to save the output if save = T}
+\item{save}{logical: states whether output is to be saved in a specified file
+(T) or in the global environment (F)}
 }
 \value{
 a data frame object (named \code{raw.sim.table}) containing all fitting and

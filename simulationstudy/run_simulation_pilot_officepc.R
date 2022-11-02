@@ -3,6 +3,7 @@
 
 # load necessary packages ------------------------------------------------------
 
+install.packages("rstan", version = "2.26.13", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
 # install.packages("rstan") <- correct version, specify from where!!!
 library(rstan)
 parallel::detectCores() # how many cores are available?
@@ -28,12 +29,11 @@ pc.pilot
 # run the simulation -----------------------------------------------------------
 
 
-apply(pc.pilot[16:18,], 1, sim.repeat.1.scenario,
+apply(pc.pilot[7:9,], 1, sim.repeat.1.scenario,
       reps = 10,
       save = T,
       path = "C:/Users/jdyck/sciebo/bADR_simstudyres_pilot"
       )
 
-sim.repeat.1.scenario(pc.pilot[10,])
 
 

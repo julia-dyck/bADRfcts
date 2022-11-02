@@ -3,7 +3,7 @@
 
 # load necessary packages ------------------------------------------------------
 
-# install.packages("rstan")
+# install.packages("rstan", version = "2.26.13", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
 # library(rstan)
 # parallel::detectCores() # how many cores are available?
 # options(mc.cores = 12) # adjust potentially (e.g.

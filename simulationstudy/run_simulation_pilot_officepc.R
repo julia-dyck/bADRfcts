@@ -10,7 +10,10 @@ options(mc.cores = 7) # adjust potentially (e.g.
                                             # explicit nr for server runs)
 rstan_options(auto_write = TRUE)
 
-# devtools::install_github(repo = "julia-dyck/bADRfcts") <- does the command work?
+# # devtools::install_github(repo = "julia-dyck/bADRfcts") <- most updated version
+# devtools::install_github(repo = "julia-dyck/bADRfcts@155e1ce47eec5242ef5d2959009a2fcd85980501")
+# # this is the package version in which rstan multicore settings are still used;
+# # compiling one "first model" for each model form was not done, yet, a that point.
 library(bADRfcts)
 
 

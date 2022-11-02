@@ -26,8 +26,6 @@ pc.pilot
 
 # run the simulation -----------------------------------------------------------
 
-# save(testobject = 1:10, file = "/home/jdyck/ownCloud/bADR_simstudyres_pilot/test.object.RData")
-
 # apply(pc.pilot[1:2,], 1, sim.repeat.1.scenario,
 #       reps = 2,
 #       save = T,
@@ -35,10 +33,10 @@ pc.pilot
 # )
 
 parallel::mclapply(1:10,sim.1.scenario.1.time,
-                   scenario.pars = pc.pilot[1,],
+                   scenario.pars = pc.pilot[8,],
                    save = T,
-                   path = getwd(),
-                   mc.cores=4)
+                   path = "/home/jdyck/ownCloud/bADR_simstudyres_pilot",
+                   mc.cores=12)
 
 
 

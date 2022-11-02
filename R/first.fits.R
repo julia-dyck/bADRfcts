@@ -8,6 +8,18 @@
 #'
 #' \code{fst.fit.fgg, fst.fit.ggg, fst.fit.fll, fst.fit.lll}.
 #'
-"first.fits"
+#' @name first.fits
+NULL
 
+#' @rdname first.fits
+"fst.fit.fgg"
+
+#' @rdname first.fits
+"fst.fit.ggg"
+
+#' @rdname first.fits
+"fst.fit.fll"
+
+#' @rdname first.fits
+"fst.fit.lll"
 
